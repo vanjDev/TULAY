@@ -22,7 +22,7 @@ const examples = [
 export default function Learn() {
   return (
     <div className="page">
-      <div className="page-hero-band">
+      <div className="page-hero-band page-hero-with-art">
         <header className="page-header">
           <span className="pill">Learn</span>
           <h1>Microaggressions, simply</h1>
@@ -30,6 +30,11 @@ export default function Learn() {
             Student-friendly guide for FEU Tech — educational, not lecture mode.
           </p>
         </header>
+        <img
+          src="/art/hinto-hub.jpg"
+          alt="Learning and reflection illustration for microaggression awareness"
+          className="page-hero-art"
+        />
       </div>
 
       <section className="panel prose">

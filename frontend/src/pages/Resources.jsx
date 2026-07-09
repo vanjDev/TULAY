@@ -1,7 +1,7 @@
 export default function Resources() {
   return (
     <div className="page">
-      <div className="page-hero-band">
+      <div className="page-hero-band page-hero-with-art">
         <header className="page-header">
           <span className="pill">Campus map &amp; support</span>
           <h1>Support &amp; contacts</h1>
@@ -10,6 +10,11 @@ export default function Resources() {
             immediate help.
           </p>
         </header>
+        <img
+          src="/art/resources-support.jpg"
+          alt="Warm campus doorway symbolizing guidance and student support"
+          className="page-hero-art"
+        />
       </div>
 
       <section className="panel">

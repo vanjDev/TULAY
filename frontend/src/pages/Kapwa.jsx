@@ -85,7 +85,7 @@ export default function Kapwa() {
 
   return (
     <div className="page">
-      <div className="page-hero-band">
+      <div className="page-hero-band page-hero-with-art">
         <header className="page-header">
           <span className="pill">K.A.P.W.A.</span>
           <h1>KAPWA Experience Wall</h1>
@@ -98,6 +98,11 @@ export default function Kapwa() {
             iba pero mabigat para sa&apos;yo?
           </p>
         </header>
+        <img
+          src="/art/kapwa-stories.jpg"
+          alt="Illustrated community story wall representing shared campus experiences"
+          className="page-hero-art"
+        />
       </div>
 
       <div className="kapwa-layout">

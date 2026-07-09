@@ -44,16 +44,12 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hero-visual" aria-hidden="true">
-          <div className="hero-bridge" />
-          <div className="pin-badge" />
-          <div className="hero-people">
-            <div className="person p1"><div className="head" /><div className="body" /></div>
-            <div className="person p2"><div className="head" /><div className="body" /></div>
-            <div className="person p3"><div className="head" /><div className="body" /></div>
-            <div className="person p4"><div className="head" /><div className="body" /></div>
-            <div className="person p5"><div className="head" /><div className="body" /></div>
-          </div>
+        <div className="hero-visual hero-visual-img">
+          <img
+            src="/art/hero-bridge.jpg"
+            alt="Diverse FEU Tech students standing together under a golden bridge of inclusion"
+            className="hero-art"
+          />
         </div>
       </section>
 

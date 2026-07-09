@@ -39,7 +39,7 @@ const cards = [
 export default function Hinto() {
   return (
     <div className="page">
-      <div className="page-hero-band">
+      <div className="page-hero-band page-hero-with-art">
         <header className="page-header">
           <span className="pill pill-alt">H.I.N.T.O. Programs</span>
           <h1>Pause. Reflect. Learn.</h1>
@@ -47,6 +47,11 @@ export default function Hinto() {
             The awareness hub — stop harmful patterns before they continue.
           </p>
         </header>
+        <img
+          src="/art/hinto-hub.jpg"
+          alt="Illustration of pause, learning, and a bridge toward awareness"
+          className="page-hero-art"
+        />
       </div>
 
       <section className="panel banner" style={{ marginBottom: "1.5rem" }}>

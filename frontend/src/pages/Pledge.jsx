@@ -47,7 +47,7 @@ export default function Pledge() {
 
   return (
     <div className="page">
-      <div className="page-hero-band">
+      <div className="page-hero-band page-hero-with-art">
         <header className="page-header">
           <span className="pill">Pledge wall</span>
           <h1>Choose acceptance</h1>
@@ -56,6 +56,11 @@ export default function Pledge() {
             anonymous.
           </p>
         </header>
+        <img
+          src="/art/pledge-hands.jpg"
+          alt="Open hands releasing a heart of inclusion and pride colors"
+          className="page-hero-art"
+        />
       </div>
 
       <div className="kapwa-layout">

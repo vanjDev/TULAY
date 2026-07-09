@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Legal() {
   return (
     <div className="page">
-      <div className="page-hero-band">
+      <div className="page-hero-band page-hero-with-art">
         <header className="page-header">
           <span className="pill">Legal rights</span>
           <h1>Know your rights</h1>
@@ -12,6 +12,11 @@ export default function Legal() {
             doubt, ask a trusted office or counsel.
           </p>
         </header>
+        <img
+          src="/art/legal-scales.jpg"
+          alt="Golden scales of justice with inclusive ribbon accents"
+          className="page-hero-art page-hero-art-square"
+        />
       </div>
 
       <section className="panel prose">

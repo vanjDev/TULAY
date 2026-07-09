@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <div className="page">
-      <div className="page-hero-band">
+      <div className="page-hero-band page-hero-with-art">
         <header className="page-header">
           <span className="pill">About the campaign</span>
           <h1>Project T.U.L.A.Y.</h1>
@@ -10,6 +10,11 @@ export default function About() {
           </p>
           <p className="hero-tag">Bridging Tolerance to Acceptance</p>
         </header>
+        <img
+          src="/art/hero-bridge.jpg"
+          alt="Students united under a bridge representing Project TULAY"
+          className="page-hero-art"
+        />
       </div>
 
       <section className="prose panel">

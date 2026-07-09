@@ -185,27 +185,13 @@ export default function Quiz() {
           )}
         </section>
 
-        <aside className="quiz-art" aria-hidden="true">
-          <div className="quiz-art-people">
-            <div className="person p1"><div className="head" /><div className="body" /></div>
-            <div className="person p3"><div className="head" /><div className="body" /></div>
-            <div className="person p2"><div className="head" /><div className="body" /></div>
-            <div className="person p4"><div className="head" /><div className="body" /></div>
-          </div>
-          <div className="quiz-art-table" />
-          <p
-            style={{
-              marginTop: "1.25rem",
-              textAlign: "center",
-              color: "var(--muted)",
-              fontFamily: "var(--display)",
-              fontSize: "1.15rem",
-              fontStyle: "italic",
-            }}
-          >
-            Pause. Choose inclusion.
-          </p>
-          <div className="pin-badge" style={{ right: "12%", bottom: "18%" }} />
+        <aside className="quiz-art quiz-art-img">
+          <img
+            src="/art/quiz-classroom.jpg"
+            alt="Diverse university students collaborating respectfully around a table"
+            className="page-art"
+          />
+          <p className="art-caption">Pause. Choose inclusion.</p>
         </aside>
       </div>
 

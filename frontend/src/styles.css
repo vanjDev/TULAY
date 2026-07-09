@@ -530,6 +530,86 @@ a:hover {
   padding: 1.5rem;
 }
 
+.hero-visual-img {
+  padding: 0;
+  align-items: stretch;
+  min-height: 360px;
+}
+
+.hero-art,
+.page-art,
+.page-hero-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-art {
+  min-height: 360px;
+  border-radius: 28px;
+}
+
+.page-hero-with-art {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1.5rem;
+  align-items: center;
+  text-align: left;
+  max-width: var(--max);
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0 0 28px 28px;
+}
+
+.page-hero-with-art .page-header {
+  text-align: left;
+  margin: 0;
+  max-width: none;
+}
+
+.page-hero-with-art .page-header .lead {
+  margin-left: 0;
+}
+
+.page-hero-art {
+  border-radius: 22px;
+  min-height: 220px;
+  max-height: 280px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+.page-hero-art-square {
+  max-height: 260px;
+  object-fit: contain;
+  background: linear-gradient(160deg, #f7f1e6, #ebe4f7);
+  padding: 0.5rem;
+}
+
+.quiz-art-img {
+  padding: 0;
+  overflow: hidden;
+  justify-content: flex-start;
+  min-height: 100%;
+}
+
+.quiz-art-img .page-art {
+  flex: 1;
+  min-height: 280px;
+}
+
+.art-caption {
+  margin: 0;
+  padding: 0.85rem 1rem 1rem;
+  text-align: center;
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-style: italic;
+  background: rgba(251, 247, 239, 0.9);
+}
+
 .hero-bridge {
   position: absolute;
   top: 8%;
@@ -1337,6 +1417,24 @@ a:hover {
 
   .hero-visual {
     min-height: 260px;
+  }
+
+  .hero-art {
+    min-height: 260px;
+  }
+
+  .page-hero-with-art {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .page-hero-with-art .page-header {
+    text-align: center;
+  }
+
+  .page-hero-with-art .page-header .lead {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .action-strip {
