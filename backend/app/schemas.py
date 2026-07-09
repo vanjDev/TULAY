@@ -1,0 +1,96 @@
+from datetime import datetime
+from typing import Literal
+
+from pydantic import BaseModel, Field
+
+
+StoryCategory = Literal[
+    "gender",
+    "sexuality",
+    "appearance",
+    "language",
+    "culture",
+    "social_status",
+    "other",
+]
+
+
+class StoryCreate(BaseModel):
+    body: str = Field(min_length=10, max_length=3000)
+    display_name: str | None = Field(default="Anonymous", max_length=80)
+    category: StoryCategory = "other"
+
+
+class StoryOut(BaseModel):
+    id: int
+    body: str
+    display_name: str
+    category: str
+    relate_count: int
+    reflection_prompt: str | None
+    created_at: datetime
+
+    model_config = {"from_attributes": True}
+
+
+class StoryAdminOut(StoryOut):
+    status: str
+
+
+class PledgeCreate(BaseModel):
+    display_name: str | None = Field(default="Anonymous", max_length=80)
+    message: str | None = Field(default=None, max_length=500)
+
+
+class PledgeOut(BaseModel):
+    id: int
+    display_name: str
+    message: str
+    created_at: datetime
+
+    model_config = {"from_attributes": True}
+
+
+class QuizOptionPublic(BaseModel):
+    id: int
+    situation: str
+    option_a: str
+    option_b: str
+    option_c: str
+    option_d: str
+    order_index: int
+
+    model_config = {"from_attributes": True}
+
+
+class QuizAnswer(BaseModel):
+    scenario_id: int
+    selected: Literal["a", "b", "c", "d"]
+
+
+class QuizFeedback(BaseModel):
+    correct: bool
+    correct_option: str
+    explanation: str
+    selected: str
+
+
+class AdminLogin(BaseModel):
+    password: str
+
+
+class TokenOut(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+
+
+class MessageOut(BaseModel):
+    message: str
+
+
+class StatsOut(BaseModel):
+    pending_stories: int
+    approved_stories: int
+    rejected_stories: int
+    pledges: int
+    quiz_scenarios: int
