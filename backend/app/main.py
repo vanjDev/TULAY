@@ -1,11 +1,18 @@
-from fastapi import FastAPI
+from pathlib import Path
+
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
 from .database import Base, SessionLocal, engine
 from .routers import admin, pledges, quiz, stories
 from .seed import seed_if_empty
 
 Base.metadata.create_all(bind=engine)
+
+# frontend/dist — built React app (served by python main.py)
+FRONTEND_DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 
 app = FastAPI(
     title="Project T.U.L.A.Y. API",
@@ -15,16 +22,8 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5174",
-        "http://localhost:4173",
-        "http://127.0.0.1:4173",
-    ],
-    allow_origin_regex=r"http://(localhost|127\.0\.0\.1):\d+",
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -50,4 +49,39 @@ def health():
         "status": "ok",
         "campaign": "Project T.U.L.A.Y.",
         "campus": "FEU Institute of Technology",
+        "frontend_built": FRONTEND_DIST.joinpath("index.html").is_file(),
     }
+
+
+def _mount_frontend() -> None:
+    """Serve the Vite production build + SPA fallback."""
+    if not FRONTEND_DIST.joinpath("index.html").is_file():
+        return
+
+    assets_dir = FRONTEND_DIST / "assets"
+    if assets_dir.is_dir():
+        app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
+
+    art_dir = FRONTEND_DIST / "art"
+    if art_dir.is_dir():
+        app.mount("/art", StaticFiles(directory=str(art_dir)), name="art")
+
+    @app.get("/")
+    def serve_index():
+        return FileResponse(FRONTEND_DIST / "index.html")
+
+    @app.get("/{full_path:path}")
+    def spa_fallback(full_path: str):
+        # Never swallow API routes (should already be matched, but be safe)
+        if full_path.startswith("api") or full_path in {"docs", "openapi.json", "redoc"}:
+            raise HTTPException(status_code=404, detail="Not found")
+
+        candidate = FRONTEND_DIST / full_path
+        if candidate.is_file():
+            return FileResponse(candidate)
+
+        # Client-side routes: /about, /kapwa, /admin, etc.
+        return FileResponse(FRONTEND_DIST / "index.html")
+
+
+_mount_frontend()
