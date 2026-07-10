@@ -20,12 +20,11 @@ A campus digital campaign for **Far Eastern University Institute of Technology (
 One command serves **frontend + API** together:
 
 ```bash
-# first time — Python deps
-cd backend
+# first time — Python deps (from repo root)
 python -m venv .venv
-.venv\Scripts\activate
+.venv\Scripts\activate          # Windows
+# source .venv/bin/activate     # macOS/Linux
 pip install -r requirements.txt
-cd ..
 
 # first time — Node (for building the UI)
 cd frontend
@@ -35,6 +34,8 @@ cd ..
 # start everything
 python main.py
 ```
+
+`requirements.txt` is at the **repo root** (same packages as `backend/requirements.txt`).
 
 Open: **http://127.0.0.1:5123**
 

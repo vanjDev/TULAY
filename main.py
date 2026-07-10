@@ -103,7 +103,6 @@ def main() -> None:
     except ImportError:
         print(
             "ERROR: uvicorn not installed.\n"
-            "  cd backend\n"
             "  python -m venv .venv\n"
             "  .venv\\Scripts\\activate   # Windows\n"
             "  pip install -r requirements.txt",

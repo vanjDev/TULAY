@@ -1,0 +1,11 @@
+# Project T.U.L.A.Y. — install from repo root:
+#   python -m pip install -r requirements.txt
+# Then:
+#   python main.py
+
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+sqlalchemy>=2.0.36
+pydantic>=2.11.0
+python-jose[cryptography]>=3.3.0
+python-multipart>=0.0.20
