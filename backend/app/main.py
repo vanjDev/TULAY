@@ -16,7 +16,7 @@ FRONTEND_DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 
 app = FastAPI(
     title="Project T.U.L.A.Y. API",
-    description="Transforming Understanding through Learning, Acceptance, and You — FEU Tech",
+    description="Transforming Understanding through Learning, Acceptance, and You — for students",
     version="1.0.0",
 )
 
@@ -48,7 +48,7 @@ def health():
     return {
         "status": "ok",
         "campaign": "Project T.U.L.A.Y.",
-        "campus": "FEU Institute of Technology",
+        "audience": "students",
         "frontend_built": FRONTEND_DIST.joinpath("index.html").is_file(),
     }
 

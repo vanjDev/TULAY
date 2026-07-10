@@ -2,7 +2,7 @@
 
 **Transforming Understanding through Learning, Acceptance, and You**
 
-A campus digital campaign for **Far Eastern University Institute of Technology (FEU Tech)** promoting awareness, empathy, and action against microaggressions and discrimination.
+A student-centered digital campaign promoting awareness, empathy, and action against microaggressions and discrimination.
 
 > *Hindi sapat ang tolerance. Dapat may acceptance.*
 
@@ -70,13 +70,13 @@ npm run dev
 
 ## Features
 
-- **Home / About** — campaign intro for FEU Tech  
+- **Home / About** — student campaign intro  
 - **Learn + H.I.N.T.O.** — microaggressions, tolerance vs acceptance  
 - **K.A.P.W.A.** — moderated story wall, categories, “I relate”  
 - **Legal** — RA 11313 awareness (educational, not legal advice)  
 - **Quiz** — campus scenarios with feedback  
 - **Pledge wall** — public commitments  
-- **Resources** — FEU Tech GCU/Discipline/SADU + national hotlines  
+- **Resources** — generic campus support + national hotlines  
 - **Admin** — approve/reject pending stories  
 
 ## Project layout
@@ -85,6 +85,7 @@ npm run dev
 main.py              # ← python main.py  (port 5123)
 backend/app/         # FastAPI + SQLite
 frontend/src/        # React pages
-frontend/public/art/ # Imagine illustrations
+frontend/public/art/ # campaign illustrations
 frontend/dist/       # production build (served by Python)
+requirements.txt     # Python dependencies
 ```

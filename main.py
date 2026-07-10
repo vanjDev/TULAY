@@ -129,7 +129,7 @@ def main() -> None:
                 )
 
     print("\n" + "=" * 52)
-    print("  Project T.U.L.A.Y.  ·  FEU Tech")
+    print("  Project T.U.L.A.Y.  ·  For students")
     print(f"  Open →  http://{args.host}:{args.port}")
     print(f"  API  →  http://{args.host}:{args.port}/api/health")
     print(f"  Docs →  http://{args.host}:{args.port}/docs")

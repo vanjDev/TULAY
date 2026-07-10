@@ -41,10 +41,10 @@ export default function Hinto() {
     <div className="page">
       <div className="page-hero-band page-hero-with-art">
         <header className="page-header">
-          <span className="pill pill-alt">H.I.N.T.O. Programs</span>
+          <span className="pill pill-alt">H.I.N.T.O.</span>
           <h1>Pause. Reflect. Learn.</h1>
           <p className="lead">
-            The awareness hub — stop harmful patterns before they continue.
+            The student awareness hub — stop harmful patterns before they continue.
           </p>
         </header>
         <img
@@ -55,7 +55,7 @@ export default function Hinto() {
       </div>
 
       <section className="panel banner" style={{ marginBottom: "1.5rem" }}>
-        <p style={{ margin: 0 }}>
+        <p>
           <strong>H.I.N.T.O.</strong> is your cue to stop, check yourself, and choose
           better. Hindi para shame-an ang tao — para turuan ang culture.
         </p>
@@ -63,10 +63,8 @@ export default function Hinto() {
 
       <section className="card-grid">
         {cards.map((c) => (
-          <article key={c.title} className="feature-card">
-            <span className="action-icon" style={{ color: "var(--forest)" }}>
-              {c.icon}
-            </span>
+          <article key={c.title} className="feature-card hover-lift">
+            <span className="action-icon soft">{c.icon}</span>
             <h3>{c.title}</h3>
             <p className="muted">{c.body}</p>
             {c.to && (
@@ -79,7 +77,7 @@ export default function Hinto() {
       </section>
 
       <section className="grid-2" style={{ marginTop: "1.5rem" }}>
-        <div className="panel prose">
+        <div className="panel prose hover-lift">
           <h2>Tolerance vs acceptance</h2>
           <p>
             <strong>Tolerance</strong> can sound like: “Okay lang sila, basta huwag sa
@@ -91,7 +89,7 @@ export default function Hinto() {
             apply to marginalized peers.
           </p>
         </div>
-        <div className="panel panel-alt prose">
+        <div className="panel panel-alt prose hover-lift">
           <h2>Quick self-check</h2>
           <ul className="nice-list">
             <li>Would I say this if the person was in power over me?</li>
@@ -102,12 +100,12 @@ export default function Hinto() {
         </div>
       </section>
 
-      <div className="btn-row" style={{ marginTop: "1.5rem", justifyContent: "center" }}>
+      <div className="btn-row page-actions">
         <Link className="btn btn-primary" to="/legal">
           Know your rights
         </Link>
         <Link className="btn btn-ghost" to="/resources">
-          FEU Tech resources
+          Student support
         </Link>
       </div>
     </div>

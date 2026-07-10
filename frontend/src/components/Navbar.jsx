@@ -1,22 +1,36 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 
-const links = [
+const primary = [
   { to: "/about", label: "About" },
-  { to: "/hinto", label: "Programs" },
-  { to: "/kapwa", label: "Stories" },
-  { to: "/resources", label: "Campus Map" },
-  { to: "/pledge", label: "Pledge Now", cta: true },
   { to: "/learn", label: "Learn" },
-  { to: "/legal", label: "Rights" },
+  { to: "/hinto", label: "HINTO" },
+  { to: "/kapwa", label: "Stories" },
   { to: "/quiz", label: "Quiz" },
+  { to: "/legal", label: "Rights" },
+  { to: "/resources", label: "Support" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
     <header className="nav">
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <div className="nav-inner">
         <NavLink to="/" className="brand" onClick={() => setOpen(false)}>
           <span className="brand-mark" aria-hidden="true">
@@ -41,44 +55,47 @@ export default function Navbar() {
             <strong>
               Project <span>TULAY</span>
             </strong>
-            <small>FEU Tech Inclusion</small>
+            <small>By students, for students</small>
           </span>
         </NavLink>
 
         <button
           className="nav-toggle"
           type="button"
-          aria-label="Toggle menu"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? "✕" : "☰"}
+          <span className={`burger ${open ? "open" : ""}`} aria-hidden="true">
+            <i />
+            <i />
+            <i />
+          </span>
         </button>
 
-        <nav className={`nav-links ${open ? "open" : ""}`}>
-          {links.map((link) => (
+        <nav className={`nav-links ${open ? "open" : ""}`} aria-label="Main">
+          {primary.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
-              onClick={() => setOpen(false)}
-              className={({ isActive }) =>
-                [link.cta ? "nav-cta" : "", isActive ? "active" : ""].filter(Boolean).join(" ") ||
-                undefined
-              }
+              className={({ isActive }) => (isActive ? "active" : undefined)}
             >
               {link.label}
             </NavLink>
           ))}
-          <a
-            className="nav-campus"
-            href="https://www.feutech.edu.ph/"
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => setOpen(false)}
-          >
-            FEU Tech
-          </a>
+          <NavLink to="/pledge" className="nav-cta">
+            Take the Pledge
+          </NavLink>
         </nav>
       </div>
+      {open && (
+        <button
+          type="button"
+          className="nav-backdrop"
+          aria-label="Close menu"
+          onClick={() => setOpen(false)}
+        />
+      )}
     </header>
   );
 }

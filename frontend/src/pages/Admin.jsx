@@ -154,8 +154,23 @@ export default function Admin() {
         ))}
       </div>
 
-      {loading && <p className="muted" style={{ textAlign: "center" }}>Loading…</p>}
-      {error && <p className="alert error">{error}</p>}
+      {loading && (
+        <div className="skeleton-grid" aria-busy="true" aria-label="Loading">
+          <div className="skeleton-card" />
+          <div className="skeleton-card" />
+        </div>
+      )}
+      {error && <p className="alert error" role="alert">{error}</p>}
+
+      {!loading && stories.length === 0 && (
+        <div className="empty-state">
+          <span className="empty-icon" aria-hidden="true">
+            ✅
+          </span>
+          <strong>Inbox clear</strong>
+          <p>No stories in this filter right now.</p>
+        </div>
+      )}
 
       <div className="story-grid">
         {stories.map((s) => (

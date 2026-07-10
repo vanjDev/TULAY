@@ -63,21 +63,26 @@ export default function Quiz() {
   if (loading) {
     return (
       <div className="page">
-        <p className="muted">Loading scenarios…</p>
+        <div className="skeleton-grid quiz-skeleton" aria-busy="true" aria-label="Loading quiz">
+          <div className="skeleton-card tall" />
+          <div className="skeleton-card tall" />
+        </div>
       </div>
     );
   }
   if (error) {
     return (
       <div className="page">
-        <p className="alert error">{error}</p>
+        <p className="alert error" role="alert">{error}</p>
       </div>
     );
   }
   if (!scenarios.length) {
     return (
       <div className="page">
-        <p className="muted">No scenarios yet.</p>
+        <div className="empty-state">
+          <p className="muted">No scenarios yet.</p>
+        </div>
       </div>
     );
   }
@@ -94,7 +99,7 @@ export default function Quiz() {
             </p>
           </header>
         </div>
-        <div className="panel" style={{ textAlign: "center" }}>
+        <div className="panel hover-lift" style={{ textAlign: "center" }}>
           <p>
             Real life is nuanced. The goal isn&apos;t perfection — it&apos;s practicing
             pause, empathy, and action toward true inclusion.
@@ -121,28 +126,39 @@ export default function Quiz() {
 
   return (
     <div className="page">
-      <div className="page-hero-band">
+      <div className="page-hero-band page-hero-with-art">
         <header className="page-header">
           <span className="pill">Interactive learning</span>
-          <h1>Scenario Quiz: Test Your Understanding</h1>
+          <h1>Scenario quiz</h1>
           <p className="lead">
-            A gamified module for FEU Tech&apos;s Gender Equality &amp; LGBTQIA+ Inclusion
-            Campaign
+            Practice what you would do — for students building safer campus habits
           </p>
         </header>
+        <img
+          src="/art/quiz-classroom.jpg"
+          alt="Diverse students collaborating respectfully"
+          className="page-hero-art"
+        />
       </div>
 
       <div className="quiz-layout">
         <section className="panel quiz-card">
           <div className="quiz-progress">
-            <div className="progress-track">
+            <div
+              className="progress-track"
+              role="progressbar"
+              aria-valuenow={progress}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label="Quiz progress"
+            >
               <div
                 className="progress-fill"
                 style={{ width: `${Math.max(progress, 8)}%` }}
               />
             </div>
             <span className="progress-label">
-              Question {index + 1} of {scenarios.length}
+              {index + 1} / {scenarios.length}
             </span>
           </div>
 
@@ -150,7 +166,7 @@ export default function Quiz() {
             <strong>Scenario:</strong> {current.situation}
           </p>
 
-          <div className="option-list">
+          <div className="option-list" role="group" aria-label="Answer choices">
             {KEYS.map((key) => {
               let cls = "option-btn";
               if (feedback) {
@@ -173,7 +189,10 @@ export default function Quiz() {
           </div>
 
           {feedback && (
-            <div className={`feedback ${feedback.correct ? "ok" : "nope"}`}>
+            <div
+              className={`feedback ${feedback.correct ? "ok" : "nope"}`}
+              role="status"
+            >
               <strong>
                 {feedback.correct ? "Solid choice." : "Let's unpack this."}
               </strong>
@@ -188,15 +207,16 @@ export default function Quiz() {
         <aside className="quiz-art quiz-art-img">
           <img
             src="/art/quiz-classroom.jpg"
-            alt="Diverse university students collaborating respectfully around a table"
+            alt=""
             className="page-art"
+            aria-hidden="true"
           />
           <p className="art-caption">Pause. Choose inclusion.</p>
         </aside>
       </div>
 
-      <p className="muted" style={{ marginTop: "1rem", textAlign: "center" }}>
-        Progress answered: {answered} · Best matches so far: {score}
+      <p className="muted quiz-meta">
+        Answered: {answered} · Best matches: {score}
       </p>
     </div>
   );

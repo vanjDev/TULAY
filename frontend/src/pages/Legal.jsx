@@ -8,8 +8,8 @@ export default function Legal() {
           <span className="pill">Legal rights</span>
           <h1>Know your rights</h1>
           <p className="lead">
-            Educational overview for FEU Tech students — not legal advice. When in
-            doubt, ask a trusted office or counsel.
+            Educational overview for students — not legal advice. When in doubt, ask
+            a trusted office or counsel.
           </p>
         </header>
         <img
@@ -19,7 +19,7 @@ export default function Legal() {
         />
       </div>
 
-      <section className="panel prose">
+      <section className="prose panel hover-lift">
         <h2>Safe Spaces Act (RA 11313) — “Bawal Bastos Law”</h2>
         <p>
           Republic Act No. 11313 covers <strong>gender-based sexual harassment</strong>{" "}
@@ -29,13 +29,12 @@ export default function Legal() {
         <p>
           The law’s definition of related harassment can include{" "}
           <strong>misogynistic, transphobic, homophobic, and sexist slurs</strong>{" "}
-          (including forms of catcalling). Educational institutions also have roles in
-          prevention — such as information campaigns and anti-sexual harassment
-          measures.
+          (including forms of catcalling). Schools also have roles in prevention —
+          such as information campaigns and anti-sexual harassment measures.
         </p>
       </section>
 
-      <section className="panel panel-alt prose" style={{ marginTop: "1.1rem" }}>
+      <section className="panel panel-alt prose hover-lift" style={{ marginTop: "1.1rem" }}>
         <h2>Careful framing (important)</h2>
         <p>
           <strong>Not every offensive joke automatically becomes a criminal act.</strong>{" "}
@@ -53,10 +52,8 @@ export default function Legal() {
       </section>
 
       <section className="grid-2" style={{ marginTop: "1.1rem" }}>
-        <div className="panel">
-          <h3 style={{ fontFamily: "var(--display)", fontSize: "1.45rem" }}>
-            What this campaign asks of us
-          </h3>
+        <div className="panel hover-lift">
+          <h3 className="panel-title">What this campaign asks of us</h3>
           <ul className="check-list">
             <li>Don’t normalize identity-based insults as “biro lang”</li>
             <li>Support peers who experience harassment</li>
@@ -64,13 +61,11 @@ export default function Legal() {
             <li>Keep learning — laws evolve; respect is daily practice</li>
           </ul>
         </div>
-        <div className="panel">
-          <h3 style={{ fontFamily: "var(--display)", fontSize: "1.45rem" }}>
-            Where to go next
-          </h3>
+        <div className="panel hover-lift">
+          <h3 className="panel-title">Where to go next</h3>
           <ul className="nice-list">
             <li>
-              <Link to="/resources">FEU Tech + national resources</Link>
+              <Link to="/resources">Campus + national support</Link>
             </li>
             <li>
               <a
@@ -82,9 +77,7 @@ export default function Legal() {
               </a>
             </li>
             <li>
-              <a href="https://www.feutech.edu.ph/contact" target="_blank" rel="noreferrer">
-                FEU Tech contact directory
-              </a>
+              <Link to="/quiz">Practice scenarios</Link>
             </li>
           </ul>
         </div>

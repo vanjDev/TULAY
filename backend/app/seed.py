@@ -14,7 +14,7 @@ SAMPLE_STORIES = [
             "yung coding part, lalaki na lang.' Parang joke lang sa kanila, pero "
             "napaisip ako kung bakit automatic na may assumption."
         ),
-        "display_name": "Anonymous FEU Techie",
+        "display_name": "Anonymous student",
         "category": "gender",
         "status": "approved",
         "relate_count": 12,
@@ -71,7 +71,7 @@ SAMPLE_PLEDGES = [
         ),
     },
     {
-        "display_name": "Anonymous Tamaraw",
+        "display_name": "Anonymous student",
         "message": (
             "I pledge to call in my friends with kindness when a joke "
             "crosses the line — hindi para mang-bash, kundi para matuto."

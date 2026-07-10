@@ -52,8 +52,7 @@ export default function Pledge() {
           <span className="pill">Pledge wall</span>
           <h1>Choose acceptance</h1>
           <p className="lead">
-            Mag-commit sa mas inclusive FEU Tech campus — name, nickname, initials, or
-            anonymous.
+            Mag-commit bilang student — name, nickname, initials, or anonymous.
           </p>
         </header>
         <img
@@ -65,13 +64,30 @@ export default function Pledge() {
 
       <div className="kapwa-layout">
         <section>
-          <h2 className="section-title" style={{ textAlign: "left" }}>
-            Community pledges
-          </h2>
-          {loading && <p className="muted">Loading…</p>}
+          <div className="section-head-row">
+            <h2 className="section-title left">Community pledges</h2>
+            {!loading && (
+              <span className="count-pill">{pledges.length} voices</span>
+            )}
+          </div>
+          {loading && (
+            <div className="skeleton-grid" aria-busy="true" aria-label="Loading pledges">
+              <div className="skeleton-card" />
+              <div className="skeleton-card" />
+            </div>
+          )}
+          {!loading && pledges.length === 0 && (
+            <div className="empty-state">
+              <span className="empty-icon" aria-hidden="true">
+                ✊
+              </span>
+              <strong>Wall is waiting</strong>
+              <p>Be the first student to post a pledge.</p>
+            </div>
+          )}
           <div className="pledge-grid">
             {pledges.map((p) => (
-              <article key={p.id} className="pledge-card">
+              <article key={p.id} className="pledge-card hover-lift">
                 <p>“{p.message}”</p>
                 <footer>— {p.display_name}</footer>
               </article>
@@ -99,12 +115,12 @@ export default function Pledge() {
                 placeholder="Anonymous / nickname"
               />
             </label>
-            <button className="btn btn-primary" type="submit">
+            <button className="btn btn-primary btn-block" type="submit">
               Post my pledge
             </button>
           </form>
-          {status && <p className="alert success">{status}</p>}
-          {error && <p className="alert error">{error}</p>}
+          {status && <p className="alert success" role="status">{status}</p>}
+          {error && <p className="alert error" role="alert">{error}</p>}
         </aside>
       </div>
     </div>

@@ -88,10 +88,9 @@ export default function Kapwa() {
       <div className="page-hero-band page-hero-with-art">
         <header className="page-header">
           <span className="pill">K.A.P.W.A.</span>
-          <h1>KAPWA Experience Wall</h1>
+          <h1>Student experience wall</h1>
           <p className="lead">
-            A safe space for sharing lived experiences and fostering understanding.
-            Your story matters.
+            A safe space for sharing lived experiences. Your story matters.
           </p>
           <p className="muted" style={{ marginTop: "0.5rem" }}>
             May naranasan ka bang joke, comment, or treatment na parang maliit lang sa
@@ -100,14 +99,14 @@ export default function Kapwa() {
         </header>
         <img
           src="/art/kapwa-stories.jpg"
-          alt="Illustrated community story wall representing shared campus experiences"
+          alt="Illustrated community story wall representing shared student experiences"
           className="page-hero-art"
         />
       </div>
 
       <div className="kapwa-layout">
         <div>
-          <div className="chip-row" style={{ marginBottom: "1.1rem", justifyContent: "flex-start" }}>
+          <div className="chip-row filters" role="tablist" aria-label="Story categories">
             <button
               type="button"
               className={`chip ${filter === "all" ? "active" : ""}`}
@@ -127,14 +126,26 @@ export default function Kapwa() {
             ))}
           </div>
 
-          {loading && <p className="muted">Loading stories…</p>}
+          {loading && (
+            <div className="skeleton-grid" aria-busy="true" aria-label="Loading stories">
+              <div className="skeleton-card" />
+              <div className="skeleton-card" />
+              <div className="skeleton-card" />
+            </div>
+          )}
           {!loading && visible.length === 0 && (
-            <p className="muted">Wala pang approved stories sa filter na ito.</p>
+            <div className="empty-state">
+              <span className="empty-icon" aria-hidden="true">
+                📝
+              </span>
+              <strong>No stories here yet</strong>
+              <p>Wala pang approved stories sa filter na ito. Be the first to share.</p>
+            </div>
           )}
 
           <div className="story-grid">
             {visible.map((story) => (
-              <article key={story.id} className="story-card">
+              <article key={story.id} className="story-card hover-lift">
                 <div className="avatar-icon">{ICONS[story.category] || "💭"}</div>
                 <div className="story-meta">
                   <span className="chip active">#{story.category.replace("_", " ")}</span>
@@ -159,9 +170,9 @@ export default function Kapwa() {
         </div>
 
         <aside className="share-panel">
-          <h2>Share Your Story</h2>
-          <p className="muted" style={{ color: "rgba(247,241,230,0.7)", textAlign: "center", marginTop: 0 }}>
-            Moderated before public — para mas safe ang space.
+          <h2>Share your story</h2>
+          <p className="share-note">
+            Moderated before public — para mas safe ang space for students.
           </p>
           <form className="form" onSubmit={onSubmit}>
             <label>
@@ -196,12 +207,12 @@ export default function Kapwa() {
                 placeholder="Anonymous / nickname / initials"
               />
             </label>
-            <button className="btn btn-primary" type="submit" disabled={submitting}>
-              {submitting ? "Sending…" : "Submit to the Wall"}
+            <button className="btn btn-primary btn-block" type="submit" disabled={submitting}>
+              {submitting ? "Sending…" : "Submit to the wall"}
             </button>
           </form>
-          {success && <p className="alert success">{success}</p>}
-          {error && <p className="alert error">{error}</p>}
+          {success && <p className="alert success" role="status">{success}</p>}
+          {error && <p className="alert error" role="alert">{error}</p>}
         </aside>
       </div>
     </div>
