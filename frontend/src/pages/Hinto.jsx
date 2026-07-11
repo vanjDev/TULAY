@@ -78,15 +78,19 @@ export default function Hinto() {
 
       <section className="grid-2" style={{ marginTop: "1.5rem" }}>
         <div className="panel prose hover-lift">
-          <h2>Tolerance vs acceptance</h2>
+          <h2>Tolerance → Belonging</h2>
           <p>
             <strong>Tolerance</strong> can sound like: “Okay lang sila, basta huwag sa
             harapan ko / basta may conditions.”
           </p>
           <p>
-            <strong>Acceptance</strong> looks like equal respect: same dignity, same
-            safety, same chance to show up fully — without special rules that only
-            apply to marginalized peers.
+            <strong>Acceptance</strong> is equal respect. <strong>Inclusion</strong>{" "}
+            is being invited in on purpose. <strong>Belonging</strong> is not having
+            to shrink who you are to stay.
+          </p>
+          <p>
+            Legal protection helps — but microaggressions still keep many LGBTQIA+
+            students stuck between tolerance and true inclusion.
           </p>
         </div>
         <div className="panel panel-alt prose hover-lift">

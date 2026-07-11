@@ -24,10 +24,11 @@ export default function Learn() {
     <div className="page">
       <div className="page-hero-band page-hero-with-art">
         <header className="page-header">
-          <span className="pill">Learn</span>
+          <span className="pill">Feature 2 · Name the Quiet Harm</span>
           <h1>Microaggressions, simply</h1>
           <p className="lead">
-            A student-friendly guide — clear, practical, and not lecture mode.
+            Why everyday jokes and “preferences” keep people stuck between
+            tolerance and inclusion — clear, practical, not lecture mode.
           </p>
         </header>
         <img

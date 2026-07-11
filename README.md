@@ -2,9 +2,40 @@
 
 **Transforming Understanding through Learning, Acceptance, and You**
 
-A student-centered digital campaign promoting awareness, empathy, and action against microaggressions and discrimination.
+A campus campaign bridging the gap between tolerance and true inclusion.
 
-> *Hindi sapat ang tolerance. Dapat may acceptance.*
+> *Bridge to Belonging — Building Connections Beyond Labels*
+
+## Core idea
+
+Legal protection does not automatically mean lived inclusion. We examine:
+
+**Tolerance → Acceptance → Inclusion → Belonging**
+
+Microaggressions (jokes, “preferences,” everyday exclusion) keep many LGBTQIA+ students stuck between tolerance and acceptance. T.U.L.A.Y. surfaces that gap and creates structured spaces — online and on campus — for genuine connection.
+
+## Features 1–5 (core journey)
+
+| # | Feature | Focus |
+|---|---------|--------|
+| 1 | **See the Gap** (Tolerance ≠ Inclusion) | Name the problem |
+| 2 | **Name the Quiet Harm** (Microaggressions) | Everyday exclusion |
+| 3 | **Hear Each Other** (Stories & Bridge Circles) | Connection |
+| 4 | **Practice Belonging** (Guided reflection) | Scenarios & prompts |
+| 5 | **Leave Your Mark** (Commitment & belonging) | Physical planks + digital pledge |
+
+**Bridge to Belonging** is the flagship live activity under Features 3–5 (register → interest circles → ground rules → reflection themes → planks → closing). See `/bridge` on the site.
+
+## Website tools
+
+- **Home / About** — campaign story & Features 1–5  
+- **Bridge** — live activity flow  
+- **Learn + H.I.N.T.O.** — microaggressions & the progression  
+- **K.A.P.W.A.** — moderated story wall  
+- **Quiz** — campus scenarios  
+- **Pledge** — digital commitment planks  
+- **Legal / Resources** — rights awareness & support  
+- **Admin** — approve/reject pending stories  
 
 ## Stack
 
@@ -35,8 +66,6 @@ cd ..
 python main.py
 ```
 
-`requirements.txt` is at the **repo root** (same packages as `backend/requirements.txt`).
-
 Open: **http://127.0.0.1:5123**
 
 ### Useful flags
@@ -48,10 +77,6 @@ python main.py --no-build   # skip rebuild (faster; uses existing dist)
 python main.py --port 5123  # explicit port
 python main.py --reload     # API auto-reload while developing
 ```
-
-**Why rebuild?** Python serves the production build in `frontend/dist`, not live React source.
-`main.py` compares timestamps of `frontend/src`, `public`, etc. vs `dist` and runs
-`npm run build` when the UI is out of date — so restarting after frontend edits updates the site.
 
 ### Admin
 
@@ -71,23 +96,12 @@ cd frontend
 npm run dev
 ```
 
-## Features
-
-- **Home / About** — student campaign intro  
-- **Learn + H.I.N.T.O.** — microaggressions, tolerance vs acceptance  
-- **K.A.P.W.A.** — moderated story wall, categories, “I relate”  
-- **Legal** — RA 11313 awareness (educational, not legal advice)  
-- **Quiz** — campus scenarios with feedback  
-- **Pledge wall** — public commitments  
-- **Resources** — generic campus support + national hotlines  
-- **Admin** — approve/reject pending stories  
-
 ## Project layout
 
 ```
 main.py              # ← python main.py  (port 5123)
 backend/app/         # FastAPI + SQLite
-frontend/src/        # React pages
+frontend/src/        # React pages + campaign.js (Features 1–5)
 frontend/public/art/ # campaign illustrations
 frontend/dist/       # production build (served by Python)
 requirements.txt     # Python dependencies

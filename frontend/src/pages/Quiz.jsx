@@ -128,7 +128,7 @@ export default function Quiz() {
     <div className="page">
       <div className="page-hero-band page-hero-with-art">
         <header className="page-header">
-          <span className="pill">Interactive learning</span>
+          <span className="pill">Feature 4 · Practice Belonging</span>
           <h1>Scenario quiz</h1>
           <p className="lead">
             Practice what you would do — for students building safer campus habits

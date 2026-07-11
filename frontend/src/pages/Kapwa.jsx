@@ -87,7 +87,7 @@ export default function Kapwa() {
     <div className="page">
       <div className="page-hero-band page-hero-with-art">
         <header className="page-header">
-          <span className="pill">K.A.P.W.A.</span>
+          <span className="pill">Feature 3 · Hear Each Other</span>
           <h1>Student experience wall</h1>
           <p className="lead">
             A safe space for sharing lived experiences. Your story matters.

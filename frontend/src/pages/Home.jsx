@@ -1,29 +1,5 @@
 import { Link } from "react-router-dom";
-
-const actions = [
-  { to: "/learn", label: "Learn", desc: "Understand microaggressions", icon: "📖", step: "01" },
-  { to: "/kapwa", label: "Share", desc: "Student voices & stories", icon: "💬", step: "02" },
-  { to: "/quiz", label: "Reflect", desc: "Practice real scenarios", icon: "🪞", step: "03" },
-  { to: "/pledge", label: "Pledge", desc: "Choose acceptance daily", icon: "✍️", step: "04" },
-];
-
-const highlights = [
-  {
-    title: "Unlearn",
-    text: "Prejudice is often learned — so it can be unlearned.",
-    icon: "🌱",
-  },
-  {
-    title: "Recognize",
-    text: "Name the jokes and habits that quietly harm peers.",
-    icon: "👁️",
-  },
-  {
-    title: "Act",
-    text: "Small choices in class, group chats, and orgs matter.",
-    icon: "✨",
-  },
-];
+import { campaign, features } from "../campaign";
 
 export default function Home() {
   return (
@@ -32,35 +8,34 @@ export default function Home() {
         <div className="hero-copy">
           <div className="pill-row">
             <span className="pill">For students</span>
-            <span className="pill pill-alt">Gender equality</span>
-            <span className="pill pill-soft">LGBTQIA+ inclusion</span>
+            <span className="pill pill-alt">LGBTQIA+ inclusion</span>
+            <span className="pill pill-soft">Campus campaign</span>
           </div>
           <h1>
-            Bridging Tolerance
+            Bridge to
             <br />
-            <span className="underline">to Acceptance</span>
+            <span className="underline">Belonging</span>
           </h1>
           <p className="hero-sub">
-            Project TULAY — a student campaign for safer, kinder campus spaces
+            {campaign.name} — {campaign.expansion}
           </p>
-          <p className="hero-tag">
-            “Hindi sapat ang tolerance. Dapat may acceptance.”
-          </p>
+          <p className="hero-tag">“{campaign.tagline}”</p>
           <p className="hero-body">
-            A digital bridge from awareness to action: unlearn prejudice, recognize
-            microaggressions, and show up for women, LGBTQIA+ classmates, and every
-            student who deserves to belong.
+            Legal protection is not the same as lived inclusion. This campaign
+            closes the gap from tolerance to true belonging — surfacing
+            microaggressions, building real connection, and inviting every
+            student to choose inclusion on purpose.
           </p>
           <div className="btn-row">
-            <Link className="btn btn-primary" to="/pledge">
-              Take the Pledge
+            <Link className="btn btn-primary" to="/bridge">
+              Bridge to Belonging
             </Link>
-            <Link className="btn btn-ghost" to="/hinto">
-              Start learning
+            <Link className="btn btn-ghost" to="/about">
+              How TULAY works
             </Link>
           </div>
           <div className="hero-trust">
-            <span>⏱ A few minutes</span>
+            <span>🌉 Five features</span>
             <span>💬 Taglish-friendly</span>
             <span>🛡️ Safe &amp; moderated</span>
           </div>
@@ -74,100 +49,122 @@ export default function Home() {
             loading="eager"
           />
           <div className="hero-float-card">
-            <strong>Not call-outs.</strong>
-            <span>Learning. Unlearning. Care.</span>
+            <strong>Tolerance is not inclusion.</strong>
+            <span>See the gap. Cross it together.</span>
           </div>
         </div>
       </section>
 
-      <section className="highlight-row" aria-label="Campaign pillars">
-        {highlights.map((h, i) => (
-          <article
-            key={h.title}
-            className="highlight-card hover-lift"
-            style={{ animationDelay: `${i * 60}ms` }}
-          >
-            <span className="highlight-icon" aria-hidden="true">
-              {h.icon}
-            </span>
-            <h3>{h.title}</h3>
-            <p>{h.text}</p>
-          </article>
-        ))}
+      <section className="journey-band" aria-label="Tolerance to Belonging">
+        <div className="section-label">The progression we care about</div>
+        <h2 className="section-title">
+          Tolerance → Acceptance → Inclusion → Belonging
+        </h2>
+        <p className="muted journey-lead">
+          Many LGBTQIA+ students remain stuck between tolerance and acceptance —
+          technically protected, not genuinely included. T.U.L.A.Y. is built to
+          move people further along this bridge.
+        </p>
+        <ol className="journey-track">
+          {campaign.progression.map((stage, i) => (
+            <li key={stage} className="journey-step">
+              <span className="journey-num">{i + 1}</span>
+              <strong>{stage}</strong>
+              {i < campaign.progression.length - 1 && (
+                <span className="journey-arrow" aria-hidden="true">
+                  →
+                </span>
+              )}
+            </li>
+          ))}
+        </ol>
       </section>
 
-      <section className="action-strip">
-        <div className="action-strip-inner">
-          <div className="section-label light">Your path</div>
-          <h2 className="strip-title">Four steps toward real inclusion</h2>
-          <p className="strip-sub">Pick any step — start where you are.</p>
-          <div className="action-grid">
-            {actions.map((a) => (
-              <Link key={a.to} to={a.to} className="action-card">
-                <span className="action-step">{a.step}</span>
-                <span className="action-icon">{a.icon}</span>
-                <strong>{a.label}</strong>
-                <span>{a.desc}</span>
-                <span className="action-go">Go →</span>
+      <section className="section" aria-label="Campaign features">
+        <div className="section-label">Features 1–5</div>
+        <h2 className="section-title left">What Project T.U.L.A.Y. does</h2>
+        <p className="muted" style={{ maxWidth: "40rem", marginBottom: "1.25rem" }}>
+          Five features aligned to our core idea — not just event logistics.
+        </p>
+        <div className="feature-journey">
+          {features.map((f) => (
+            <article key={f.n} className="feature-journey-card hover-lift">
+              <div className="feature-journey-head">
+                <span className="feature-n">Feature {f.n}</span>
+                <span className="feature-stage">{f.stage}</span>
+              </div>
+              <span className="feature-emoji" aria-hidden="true">
+                {f.icon}
+              </span>
+              <h3>
+                {f.title}{" "}
+                <span className="feature-sub">({f.subtitle})</span>
+              </h3>
+              <p>{f.body}</p>
+              <Link to={f.to} className="text-link">
+                Explore →
               </Link>
-            ))}
-          </div>
+            </article>
+          ))}
         </div>
       </section>
 
       <section className="section two-col">
         <div className="panel hover-lift feature-panel">
           <div className="feature-panel-top">
-            <span className="badge">K.A.P.W.A.</span>
+            <span className="badge">Live activity</span>
             <span className="feature-emoji" aria-hidden="true">
-              💬
+              🤝
             </span>
           </div>
-          <h3 className="panel-title">Safe space for shared experiences</h3>
+          <h3 className="panel-title">Bridge to Belonging</h3>
           <p>
-            Mag-share o magbasa ng stories tungkol sa discrimination, exclusion, o
-            microaggressions — anonymously or with a name. Moderated for safety.
+            Our flagship campus activity: interest-based Bridge Circles, guided
+            reflection, and commitment planks — how Features 3–5 happen in person.
           </p>
-          <Link to="/kapwa" className="text-link">
-            Open the wall →
+          <Link to="/bridge" className="text-link">
+            See how a circle works →
           </Link>
         </div>
         <div className="panel panel-alt hover-lift feature-panel">
           <div className="feature-panel-top">
-            <span className="badge badge-on-dark">H.I.N.T.O.</span>
+            <span className="badge badge-on-dark">Always open</span>
             <span className="feature-emoji" aria-hidden="true">
-              ⏸️
+              🌐
             </span>
           </div>
-          <h3 className="panel-title">Pause, reflect, and learn</h3>
+          <h3 className="panel-title">This website is the digital bridge</h3>
           <p>
-            Stop harmful patterns before they continue. Explainers, examples, better
-            alternatives — plus careful legal awareness for students.
+            Learn the gap, share stories, practice scenarios, and leave a digital
+            plank anytime — even when there is no booth on campus.
           </p>
-          <Link to="/hinto" className="text-link">
-            Enter the hub →
+          <Link to="/learn" className="text-link">
+            Start with Learn →
           </Link>
         </div>
       </section>
 
       <section className="section banner">
         <p>
-          Hindi ito para mang-call out lang. Para ito matuto, mag-unlearn, at maging
-          mas aware sa epekto ng words and actions natin.
+          Hindi sapat ang tolerance. Hindi rin sapat ang “okay lang sila” kung
+          hindi sila kasama. Belonging is the destination — inclusion is how we
+          get there.
         </p>
       </section>
 
       <section className="cta-band">
         <div>
-          <h2>Ready to practice?</h2>
-          <p>Try a scenario, then leave a pledge for your classmates.</p>
+          <h2>Leave your plank</h2>
+          <p>
+            Practice a scenario, then post a public commitment to inclusion.
+          </p>
         </div>
         <div className="btn-row">
-          <Link className="btn btn-primary" to="/quiz">
-            Take the quiz
+          <Link className="btn btn-primary" to="/pledge">
+            Digital plank
           </Link>
-          <Link className="btn btn-ghost-light" to="/resources">
-            Find support
+          <Link className="btn btn-ghost-light" to="/quiz">
+            Practice first
           </Link>
         </div>
       </section>

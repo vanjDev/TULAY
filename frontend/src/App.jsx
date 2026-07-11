@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Bridge from "./pages/Bridge";
 import Learn from "./pages/Learn";
 import Hinto from "./pages/Hinto";
 import Kapwa from "./pages/Kapwa";
@@ -17,6 +18,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
+        <Route path="bridge" element={<Bridge />} />
         <Route path="learn" element={<Learn />} />
         <Route path="hinto" element={<Hinto />} />
         <Route path="kapwa" element={<Kapwa />} />

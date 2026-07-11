@@ -3,6 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 
 const primary = [
   { to: "/about", label: "About" },
+  { to: "/bridge", label: "Bridge" },
   { to: "/learn", label: "Learn" },
   { to: "/hinto", label: "HINTO" },
   { to: "/kapwa", label: "Stories" },
@@ -55,7 +56,7 @@ export default function Navbar() {
             <strong>
               Project <span>TULAY</span>
             </strong>
-            <small>By students, for students</small>
+            <small>Bridge to Belonging</small>
           </span>
         </NavLink>
 
@@ -84,7 +85,7 @@ export default function Navbar() {
             </NavLink>
           ))}
           <NavLink to="/pledge" className="nav-cta">
-            Take the Pledge
+            Leave a Plank
           </NavLink>
         </nav>
       </div>
