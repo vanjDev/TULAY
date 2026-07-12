@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  ArrowRight,
+  CircleUserRound,
+  KeyRound,
+  Save,
+  UserRound,
+  UsersRound,
+} from "lucide-react";
 import { api } from "../api";
 import {
   loadParticipantSession,
@@ -68,11 +76,11 @@ export default function Settings() {
     setAccountMessage("");
 
     if (newPassword && newPassword !== confirmPassword) {
-      setAccountError("New password and confirmation do not match.");
+      setAccountError("Passwords do not match.");
       return;
     }
     if (newPassword && newPassword.length < 8) {
-      setAccountError("New password must be at least 8 characters.");
+      setAccountError("Password must be at least 8 characters.");
       return;
     }
 
@@ -92,9 +100,9 @@ export default function Settings() {
       setCurrentPassword("");
       setNewPassword("");
       setConfirmPassword("");
-      setAccountMessage("Account settings saved.");
+      setAccountMessage("Saved.");
     } catch (err) {
-      setAccountError(err.message || "Unable to save settings");
+      setAccountError(err.message || "Unable to save");
     } finally {
       setAccountLoading(false);
     }
@@ -113,9 +121,7 @@ export default function Settings() {
       <section className="auth-hero">
         <div className="section-label">Account</div>
         <h1>Settings</h1>
-        <p className="lead">
-          Manage your username, password, and Bridge Circle profile in one place.
-        </p>
+        <p className="lead">Username, password, Bridge profile.</p>
       </section>
 
       <div className="settings-tabs" role="tablist" aria-label="Settings sections">
@@ -126,6 +132,7 @@ export default function Settings() {
           aria-selected={activeTab === "account"}
           onClick={() => setActiveTab("account")}
         >
+          <CircleUserRound size={16} strokeWidth={2} aria-hidden="true" />
           Account
         </button>
         <button
@@ -135,7 +142,8 @@ export default function Settings() {
           aria-selected={activeTab === "profile"}
           onClick={() => setActiveTab("profile")}
         >
-          Bridge profile
+          <UsersRound size={16} strokeWidth={2} aria-hidden="true" />
+          Profile
           {!isProfileComplete(participant) && (
             <span className="settings-tab-dot" aria-label="Incomplete" />
           )}
@@ -144,10 +152,10 @@ export default function Settings() {
 
       {activeTab === "account" && (
         <section className="panel auth-panel settings-panel">
-          <h2 className="panel-title">Account details</h2>
+          <h2 className="panel-title">Account</h2>
           <p className="muted">
-            Signed in as <strong>{participant?.email}</strong>
-            {participant?.email_verified ? " (verified)" : ""}.
+            <strong>{participant?.email}</strong>
+            {participant?.email_verified ? " · verified" : ""}
           </p>
 
           {accountError && <div className="alert error">{accountError}</div>}
@@ -170,23 +178,23 @@ export default function Settings() {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="optional public handle"
+                placeholder="@handle (optional)"
                 minLength={3}
                 maxLength={40}
                 pattern="[A-Za-z0-9_]*"
                 title="Letters, numbers, and underscores only"
               />
             </label>
-            <p className="field-help">
-              Email is managed by your sign-in method and cannot be changed here.
-            </p>
 
             <fieldset>
-              <legend>{hasPassword ? "Change password" : "Set a password"}</legend>
+              <legend>
+                <KeyRound size={16} strokeWidth={2} aria-hidden="true" className="legend-icon" />
+                {hasPassword ? "Password" : "Set password"}
+              </legend>
               <p className="field-help">
                 {hasPassword
-                  ? "Enter your current password to set a new one."
-                  : "You signed in with Google. Optionally add a password for email login."}
+                  ? "Current password required to change."
+                  : "Optional if you use Google sign-in."}
               </p>
               {hasPassword && (
                 <label>
@@ -211,7 +219,7 @@ export default function Settings() {
                   />
                 </label>
                 <label>
-                  Confirm new password
+                  Confirm
                   <input
                     type="password"
                     autoComplete="new-password"
@@ -224,13 +232,15 @@ export default function Settings() {
             </fieldset>
 
             <button className="btn btn-primary btn-block" type="submit" disabled={accountLoading}>
-              {accountLoading ? "Saving..." : "Save account settings"}
+              <Save size={18} strokeWidth={2.2} aria-hidden="true" />
+              {accountLoading ? "Saving…" : "Save"}
             </button>
           </form>
 
           <div className="settings-footer-links">
             <Link className="text-link" to="/bridge">
-              Go to Bridge →
+              Bridge
+              <ArrowRight size={15} strokeWidth={2.2} aria-hidden="true" />
             </Link>
           </div>
         </section>
@@ -239,15 +249,18 @@ export default function Settings() {
       {activeTab === "profile" && (
         <section className="panel bridge-registration hover-lift settings-panel">
           <div className="registration-kicker">
-            <span className="section-label">Bridge Circle profile</span>
+            <span className="section-label">
+              <UserRound size={14} strokeWidth={2} aria-hidden="true" /> Bridge profile
+            </span>
             <span className="registration-line" aria-hidden="true" />
           </div>
           <ProfileForm
             key={participant?.id || "profile"}
             initialParticipant={participant}
-            submitLabel="Save Bridge profile"
-            submittingLabel="Saving..."
-            description="Same form as Join the Bridge — update anytime from Settings."
+            compactHeader
+            submitLabel="Save profile"
+            submittingLabel="Saving…"
+            description="Same as Join the Bridge."
             onSubmit={saveProfile}
           />
         </section>

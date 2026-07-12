@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ArrowRight, LogIn, UserPlus } from "lucide-react";
 import { api } from "../api";
 import {
   loadParticipantSession,
@@ -93,28 +94,23 @@ export default function Register() {
     return (
       <div className="page auth-page">
         <section className="auth-hero">
-          <div className="section-label">Almost there</div>
-          <h1>Complete your Bridge Circle profile</h1>
-          <p className="lead">
-            Same details used when you Join the Bridge — interests, course, and a
-            few optional identity fields so facilitators can welcome you well.
-          </p>
+          <div className="section-label">Step 2 of 2</div>
+          <h1>Bridge profile</h1>
+          <p className="lead">Course, interests, and a few details to join a circle.</p>
         </section>
 
         <section className="panel bridge-registration hover-lift">
-          <div className="registration-kicker">
-            <span className="section-label">Step 2 of 2</span>
-            <span className="registration-line" aria-hidden="true" />
-          </div>
           {error && <div className="alert error">{error}</div>}
           <ProfileForm
             initialParticipant={session?.participant}
-            submitLabel="Finish registration"
-            submittingLabel="Saving profile..."
+            compactHeader
+            title="Your profile"
+            description="Same form as Join the Bridge."
+            submitLabel="Finish"
+            submittingLabel="Saving…"
             onSubmit={async (payload) => {
               const auth = await handleProfileSubmit(payload);
-              // Brief confirmation is shown by ProfileForm; then send them to Bridge.
-              window.setTimeout(() => navigate("/bridge"), 1200);
+              window.setTimeout(() => navigate("/bridge"), 1000);
               return auth;
             }}
           />
@@ -126,29 +122,22 @@ export default function Register() {
   return (
     <div className="page auth-page">
       <section className="auth-hero">
-        <div className="section-label">Registration</div>
-        <h1>Create your Project T.U.L.A.Y. account</h1>
-        <p className="lead">
-          Start with the basics. Next you&apos;ll fill in the same Bridge Circle
-          profile used when joining an activity.
-        </p>
+        <div className="section-label">Step 1 of 2</div>
+        <h1>Create account</h1>
+        <p className="lead">Google or email. Profile next.</p>
       </section>
 
       <section className="auth-grid">
         <div className="panel auth-panel">
-          <h2 className="panel-title">Step 1 — Account basics</h2>
-          <p className="muted">
-            Start with Google in one tap, or register with email. Bridge profile comes next.
-          </p>
+          <h2 className="panel-title">Account basics</h2>
           {error && <div className="alert error">{error}</div>}
 
           <div className="auth-social">
-            <p className="auth-social-label">Quick sign-up</p>
             <GoogleSignInButton onCredential={handleGoogleCredential} context="signup" />
           </div>
 
           <div className="auth-divider" role="separator">
-            <span>Or register with email</span>
+            <span>or email</span>
           </div>
 
           <form className="form" onSubmit={handleSubmit}>
@@ -165,7 +154,7 @@ export default function Register() {
               />
             </label>
             <label>
-              Email address
+              Email
               <input
                 type="email"
                 name="email"
@@ -188,20 +177,20 @@ export default function Register() {
               />
             </label>
             <button className="btn btn-primary btn-block" type="submit" disabled={loading}>
-              {loading ? "Creating account..." : "Continue to profile"}
+              <UserPlus size={18} strokeWidth={2.2} aria-hidden="true" />
+              {loading ? "Creating…" : "Continue"}
+              <ArrowRight size={16} strokeWidth={2.2} aria-hidden="true" />
             </button>
           </form>
         </div>
 
         <aside className="panel auth-side">
-          <span className="badge">Already registered?</span>
-          <h2 className="panel-title">Log in instead</h2>
-          <p>
-            If you already have an account, sign in and finish your Bridge profile
-            from Settings if needed.
-          </p>
+          <span className="badge">Have an account?</span>
+          <h2 className="panel-title">Sign in</h2>
+          <p>Finish your Bridge profile anytime in Settings.</p>
           <Link className="btn btn-ghost" to="/login">
-            Go to login
+            <LogIn size={18} strokeWidth={2} aria-hidden="true" />
+            Sign in
           </Link>
         </aside>
       </section>

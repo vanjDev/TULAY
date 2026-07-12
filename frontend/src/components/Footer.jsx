@@ -6,14 +6,14 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-top">
         <div className="footer-links">
-          <Link to="/bridge">Bridge to Belonging</Link>
-          <Link to="/legal">Rights &amp; policies</Link>
-          <Link to="/resources">Get support</Link>
-          <Link to="/about">About TULAY</Link>
-          <Link to="/kapwa">Share a story</Link>
+          <Link to="/bridge">Bridge</Link>
+          <Link to="/legal">Rights</Link>
+          <Link to="/resources">Support</Link>
+          <Link to="/about">About</Link>
+          <Link to="/kapwa">Stories</Link>
         </div>
         <div className="footer-stat">
-          <span>From tolerance toward belonging — one choice at a time</span>
+          <span>Tolerance → Belonging</span>
           <div className="footer-stat-bar" aria-hidden="true">
             <span />
           </div>
@@ -24,31 +24,25 @@ export default function Footer() {
         <div>
           <h3>{campaign.name}</h3>
           <p>
-            {campaign.expansion} — a student-led campus campaign bridging the gap
-            between tolerance and true inclusion for LGBTQIA+ students and every
-            peer who deserves to belong.
+            Student-led campus campaign for LGBTQIA+ inclusion and belonging.
           </p>
-          <p className="tagline-sm">{campaign.tagline}</p>
+          <p className="tagline-sm">{campaign.shortTagline}</p>
         </div>
         <div>
-          <h4>Features 1–5</h4>
+          <h4>Features</h4>
           <ul>
             <li><Link to="/about">See the Gap</Link></li>
-            <li><Link to="/learn">Name the Quiet Harm</Link></li>
-            <li><Link to="/kapwa">Hear Each Other</Link></li>
-            <li><Link to="/quiz">Practice Belonging</Link></li>
-            <li><Link to="/pledge">Leave Your Mark</Link></li>
+            <li><Link to="/learn">Quiet Harm</Link></li>
+            <li><Link to="/kapwa">Stories</Link></li>
+            <li><Link to="/quiz">Practice</Link></li>
+            <li><Link to="/pledge">Your Mark</Link></li>
           </ul>
         </div>
         <div>
-          <h4>For students</h4>
+          <h4>Note</h4>
           <p>
-            Whether you&apos;re learning, unlearning, joining a Bridge Circle, or
-            looking for support — this space is for you.
-          </p>
-          <p className="muted" style={{ color: "rgba(247,241,230,0.55)" }}>
-            Educational campaign only. Not a substitute for official reporting
-            channels or legal advice.
+            Educational campaign only — not a substitute for official reporting or
+            legal advice.
           </p>
         </div>
       </div>

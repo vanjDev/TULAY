@@ -1,6 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
+  ChevronDown,
+  LogOut,
+  Menu,
+  Settings,
+  UserRound,
+  X,
+} from "lucide-react";
+import {
   clearParticipantSession,
   getParticipantAuthEventName,
   loadParticipantSession,
@@ -124,11 +132,7 @@ export default function Navbar() {
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
-          <span className={`burger ${open ? "open" : ""}`} aria-hidden="true">
-            <i />
-            <i />
-            <i />
-          </span>
+          {open ? <X size={20} strokeWidth={2.2} /> : <Menu size={20} strokeWidth={2.2} />}
         </button>
 
         <nav className={`nav-links ${open ? "open" : ""}`} aria-label="Main">
@@ -151,14 +155,19 @@ export default function Navbar() {
                 aria-expanded={accountOpen}
                 onClick={() => setAccountOpen((value) => !value)}
               >
-                <AccountIcon />
+                <span className="nav-user-icon" aria-hidden="true">
+                  <UserRound size={18} strokeWidth={2} />
+                </span>
                 <span className="nav-user-copy">
                   <span className="nav-user-label">Account</span>
                   {displayName && <span className="nav-user-name">{displayName}</span>}
                 </span>
-                <span className="nav-user-caret" aria-hidden="true">
-                  v
-                </span>
+                <ChevronDown
+                  className={`nav-user-caret-icon${accountOpen ? " open" : ""}`}
+                  size={16}
+                  strokeWidth={2.2}
+                  aria-hidden="true"
+                />
               </button>
               {accountOpen && (
                 <div className="nav-account-dropdown" role="menu">
@@ -176,24 +185,28 @@ export default function Navbar() {
                     className="nav-account-link"
                     onClick={() => setAccountOpen(false)}
                   >
+                    <Settings size={16} strokeWidth={2} aria-hidden="true" />
                     Settings
                   </NavLink>
                   <button type="button" role="menuitem" onClick={handleLogout}>
+                    <LogOut size={16} strokeWidth={2} aria-hidden="true" />
                     Log out
                   </button>
                 </div>
               )}
             </div>
           ) : (
-            <NavLink to="/login" className="nav-user-link" aria-label="Login or create an account">
-              <AccountIcon />
+            <NavLink to="/login" className="nav-user-link" aria-label="Sign in">
+              <span className="nav-user-icon" aria-hidden="true">
+                <UserRound size={18} strokeWidth={2} />
+              </span>
               <span className="nav-user-copy">
-                <span className="nav-user-label">Account</span>
+                <span className="nav-user-label">Sign in</span>
               </span>
             </NavLink>
           )}
           <NavLink to="/pledge" className="nav-cta">
-            Leave a Plank
+            Pledge
           </NavLink>
         </nav>
       </div>
@@ -216,20 +229,4 @@ function formatParticipantName(fullName) {
   if (!words.length) return "";
 
   return words.slice(0, 2).join(" ");
-}
-
-function AccountIcon() {
-  return (
-    <span className="nav-user-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth="1.8" />
-        <path
-          d="M5 19C6.4 15.9 8.77 14.35 12 14.35C15.23 14.35 17.6 15.9 19 19"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-        />
-      </svg>
-    </span>
-  );
 }

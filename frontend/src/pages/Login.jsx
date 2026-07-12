@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ArrowRight, LogIn, UserPlus } from "lucide-react";
 import { api } from "../api";
 import { loadParticipantSession, saveParticipantSession } from "../auth";
 import GoogleSignInButton from "../components/GoogleSignInButton";
@@ -66,38 +67,31 @@ export default function Login() {
     <div className="page auth-page">
       <section className="auth-hero">
         <div className="section-label">Account</div>
-        <h1>Log in to your Bridge Circle account</h1>
-        <p className="lead">
-          Access your participant profile and stay inside the T.U.L.A.Y. journey without
-          leaving the website.
-        </p>
+        <h1>Sign in</h1>
+        <p className="lead">Continue your T.U.L.A.Y. journey.</p>
       </section>
 
       <section className="auth-grid">
         <div className="panel auth-panel">
           <h2 className="panel-title">Welcome back</h2>
-          <p className="muted">
-            Sign in with Google, or use the email and password from registration.
-          </p>
           {session?.participant && (
             <div className="alert success">
-              Signed in most recently as <strong>{session.participant.full_name}</strong>.
+              Last signed in as <strong>{session.participant.full_name}</strong>
             </div>
           )}
           {error && <div className="alert error">{error}</div>}
 
           <div className="auth-social">
-            <p className="auth-social-label">Quick sign-in</p>
             <GoogleSignInButton onCredential={handleGoogleCredential} context="signin" />
           </div>
 
           <div className="auth-divider" role="separator">
-            <span>Or continue with email</span>
+            <span>or email</span>
           </div>
 
           <form className="form" onSubmit={handleSubmit}>
             <label>
-              Email address
+              Email
               <input
                 type="email"
                 name="email"
@@ -120,20 +114,20 @@ export default function Login() {
               />
             </label>
             <button className="btn btn-primary btn-block" type="submit" disabled={loading}>
-              {loading ? "Logging in..." : "Log in"}
+              <LogIn size={18} strokeWidth={2.2} aria-hidden="true" />
+              {loading ? "Signing in…" : "Sign in"}
             </button>
           </form>
         </div>
 
         <aside className="panel auth-side">
           <span className="badge">New here?</span>
-          <h2 className="panel-title">Create your account</h2>
-          <p>
-            Register with email or Google, then complete the same Bridge Circle profile
-            used when joining an activity.
-          </p>
+          <h2 className="panel-title">Create account</h2>
+          <p>Google or email — then finish your Bridge profile.</p>
           <Link className="btn btn-ghost" to="/register">
-            Create an account
+            <UserPlus size={18} strokeWidth={2} aria-hidden="true" />
+            Register
+            <ArrowRight size={16} strokeWidth={2.2} aria-hidden="true" />
           </Link>
         </aside>
       </section>

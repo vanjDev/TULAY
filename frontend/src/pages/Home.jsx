@@ -1,5 +1,24 @@
 import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  BookOpen,
+  Eye,
+  Handshake,
+  MessageCircle,
+  PenLine,
+  Search,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 import { campaign, features } from "../campaign";
+
+const featureIcons = {
+  1: Eye,
+  2: Search,
+  3: MessageCircle,
+  4: Sparkles,
+  5: PenLine,
+};
 
 export default function Home() {
   return (
@@ -7,37 +26,40 @@ export default function Home() {
       <section className="hero">
         <div className="hero-copy">
           <div className="pill-row">
-            <span className="pill">For students</span>
-            <span className="pill pill-alt">LGBTQIA+ inclusion</span>
-            <span className="pill pill-soft">Campus campaign</span>
+            <span className="pill">Students</span>
+            <span className="pill pill-alt">LGBTQIA+</span>
+            <span className="pill pill-soft">Campus</span>
           </div>
           <h1>
             Bridge to
             <br />
             <span className="underline">Belonging</span>
           </h1>
-          <p className="hero-sub">
-            {campaign.name} — {campaign.expansion}
-          </p>
-          <p className="hero-tag">“{campaign.tagline}”</p>
+          <p className="hero-tag">“{campaign.shortTagline}”</p>
           <p className="hero-body">
-            Legal protection is not the same as lived inclusion. This campaign
-            closes the gap from tolerance to true belonging — surfacing
-            microaggressions, building real connection, and inviting every
-            student to choose inclusion on purpose.
+            From tolerance to true inclusion — connection, practice, and a public
+            commitment.
           </p>
           <div className="btn-row">
             <Link className="btn btn-primary" to="/bridge">
-              Bridge to Belonging
+              <Handshake size={18} strokeWidth={2.2} aria-hidden="true" />
+              Join Bridge
+              <ArrowRight size={16} strokeWidth={2.2} aria-hidden="true" />
             </Link>
             <Link className="btn btn-ghost" to="/about">
-              How TULAY works
+              How it works
             </Link>
           </div>
           <div className="hero-trust">
-            <span>🌉 Five features</span>
-            <span>💬 Taglish-friendly</span>
-            <span>🛡️ Safe &amp; moderated</span>
+            <span>
+              <Sparkles size={15} strokeWidth={2} aria-hidden="true" /> 5 features
+            </span>
+            <span>
+              <MessageCircle size={15} strokeWidth={2} aria-hidden="true" /> Taglish OK
+            </span>
+            <span>
+              <ShieldCheck size={15} strokeWidth={2} aria-hidden="true" /> Moderated
+            </span>
           </div>
         </div>
 
@@ -49,22 +71,17 @@ export default function Home() {
             loading="eager"
           />
           <div className="hero-float-card">
-            <strong>Tolerance is not inclusion.</strong>
+            <strong>Tolerance ≠ inclusion</strong>
             <span>See the gap. Cross it together.</span>
           </div>
         </div>
       </section>
 
       <section className="journey-band" aria-label="Tolerance to Belonging">
-        <div className="section-label">The progression we care about</div>
+        <div className="section-label">The path</div>
         <h2 className="section-title">
           Tolerance → Acceptance → Inclusion → Belonging
         </h2>
-        <p className="muted journey-lead">
-          Many LGBTQIA+ students remain stuck between tolerance and acceptance —
-          technically protected, not genuinely included. T.U.L.A.Y. is built to
-          move people further along this bridge.
-        </p>
         <ol className="journey-track">
           {campaign.progression.map((stage, i) => (
             <li key={stage} className="journey-step">
@@ -82,86 +99,81 @@ export default function Home() {
 
       <section className="section" aria-label="Campaign features">
         <div className="section-label">Features 1–5</div>
-        <h2 className="section-title left">What Project T.U.L.A.Y. does</h2>
-        <p className="muted" style={{ maxWidth: "40rem", marginBottom: "1.25rem" }}>
-          Five features aligned to our core idea — not just event logistics.
-        </p>
+        <h2 className="section-title left">What we do</h2>
         <div className="feature-journey">
-          {features.map((f) => (
-            <article key={f.n} className="feature-journey-card hover-lift">
-              <div className="feature-journey-head">
-                <span className="feature-n">Feature {f.n}</span>
-                <span className="feature-stage">{f.stage}</span>
-              </div>
-              <span className="feature-emoji" aria-hidden="true">
-                {f.icon}
-              </span>
-              <h3>
-                {f.title}{" "}
-                <span className="feature-sub">({f.subtitle})</span>
-              </h3>
-              <p>{f.body}</p>
-              <Link to={f.to} className="text-link">
-                Explore →
-              </Link>
-            </article>
-          ))}
+          {features.map((f) => {
+            const Icon = featureIcons[f.n] || Sparkles;
+            return (
+              <article key={f.n} className="feature-journey-card hover-lift">
+                <div className="feature-journey-head">
+                  <span className="feature-n">{f.n}</span>
+                  <span className="feature-stage">{f.stage}</span>
+                </div>
+                <span className="feature-icon-wrap" aria-hidden="true">
+                  <Icon size={22} strokeWidth={2} />
+                </span>
+                <h3>
+                  {f.title}{" "}
+                  <span className="feature-sub">({f.subtitle})</span>
+                </h3>
+                <p>{shorten(f.body, 140)}</p>
+                <Link to={f.to} className="text-link">
+                  Open
+                  <ArrowRight size={15} strokeWidth={2.2} aria-hidden="true" />
+                </Link>
+              </article>
+            );
+          })}
         </div>
       </section>
 
       <section className="section two-col">
         <div className="panel hover-lift feature-panel">
           <div className="feature-panel-top">
-            <span className="badge">Live activity</span>
-            <span className="feature-emoji" aria-hidden="true">
-              🤝
+            <span className="badge">Live</span>
+            <span className="feature-icon-wrap soft" aria-hidden="true">
+              <Handshake size={20} strokeWidth={2} />
             </span>
           </div>
-          <h3 className="panel-title">Bridge to Belonging</h3>
-          <p>
-            Our flagship campus activity: interest-based Bridge Circles, guided
-            reflection, and commitment planks — how Features 3–5 happen in person.
-          </p>
+          <h3 className="panel-title">Bridge Circles</h3>
+          <p>Interest groups, reflection, and commitment planks — Features 3–5 in person.</p>
           <Link to="/bridge" className="text-link">
-            See how a circle works →
+            How a circle works
+            <ArrowRight size={15} strokeWidth={2.2} aria-hidden="true" />
           </Link>
         </div>
         <div className="panel panel-alt hover-lift feature-panel">
           <div className="feature-panel-top">
-            <span className="badge badge-on-dark">Always open</span>
-            <span className="feature-emoji" aria-hidden="true">
-              🌐
+            <span className="badge badge-on-dark">Always on</span>
+            <span className="feature-icon-wrap soft on-dark" aria-hidden="true">
+              <BookOpen size={20} strokeWidth={2} />
             </span>
           </div>
-          <h3 className="panel-title">This website is the digital bridge</h3>
-          <p>
-            Learn the gap, share stories, practice scenarios, and leave a digital
-            plank anytime — even when there is no booth on campus.
-          </p>
+          <h3 className="panel-title">Digital bridge</h3>
+          <p>Learn, share, practice, and pledge anytime — no booth required.</p>
           <Link to="/learn" className="text-link">
-            Start with Learn →
+            Start with Learn
+            <ArrowRight size={15} strokeWidth={2.2} aria-hidden="true" />
           </Link>
         </div>
       </section>
 
       <section className="section banner">
         <p>
-          Hindi sapat ang tolerance. Hindi rin sapat ang “okay lang sila” kung
-          hindi sila kasama. Belonging is the destination — inclusion is how we
-          get there.
+          Hindi sapat ang tolerance. Belonging is the destination — inclusion is
+          the path.
         </p>
       </section>
 
       <section className="cta-band">
         <div>
           <h2>Leave your plank</h2>
-          <p>
-            Practice a scenario, then post a public commitment to inclusion.
-          </p>
+          <p>Practice a scenario, then commit publicly.</p>
         </div>
         <div className="btn-row">
           <Link className="btn btn-primary" to="/pledge">
-            Digital plank
+            <PenLine size={18} strokeWidth={2.2} aria-hidden="true" />
+            Pledge
           </Link>
           <Link className="btn btn-ghost-light" to="/quiz">
             Practice first
@@ -170,4 +182,11 @@ export default function Home() {
       </section>
     </div>
   );
+}
+
+function shorten(text, max) {
+  if (!text || text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${cut.slice(0, lastSpace > 40 ? lastSpace : max).trim()}…`;
 }
