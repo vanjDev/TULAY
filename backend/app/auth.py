@@ -95,3 +95,34 @@ def require_admin(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid or expired token",
         ) from exc
+
+
+def decode_participant_token(token: str) -> dict:
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    except JWTError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired token",
+        ) from exc
+    if payload.get("role") != "participant":
+        raise HTTPException(status_code=403, detail="Not authorized")
+    return payload
+
+
+def require_participant_id(
+    credentials: HTTPAuthorizationCredentials | None = Depends(security),
+) -> int:
+    if credentials is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Sign in required",
+        )
+    payload = decode_participant_token(credentials.credentials)
+    try:
+        return int(payload.get("sub"))
+    except (TypeError, ValueError) as exc:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid participant token",
+        ) from exc

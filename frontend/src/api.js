@@ -35,6 +35,10 @@ async function request(path, options = {}) {
   return data;
 }
 
+function authHeaders(token) {
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
 export const api = {
   getParticipantAuthConfig: () => request("/api/participants/auth-config"),
   registerParticipant: (body) =>
@@ -50,6 +54,22 @@ export const api = {
   loginParticipantWithGoogle: (body) =>
     request("/api/participants/google", {
       method: "POST",
+      body: JSON.stringify(body),
+    }),
+  getMe: (token) =>
+    request("/api/participants/me", {
+      headers: authHeaders(token),
+    }),
+  updateProfile: (token, body) =>
+    request("/api/participants/me/profile", {
+      method: "PUT",
+      headers: authHeaders(token),
+      body: JSON.stringify(body),
+    }),
+  updateSettings: (token, body) =>
+    request("/api/participants/me/settings", {
+      method: "PATCH",
+      headers: authHeaders(token),
       body: JSON.stringify(body),
     }),
   getStories: () => request("/api/stories"),

@@ -24,7 +24,9 @@ export default function Navbar() {
   const accountMenuRef = useRef(null);
   const location = useLocation();
 
-  const displayName = formatParticipantName(session?.participant?.full_name);
+  const displayName = session?.participant?.username
+    ? `@${session.participant.username}`
+    : formatParticipantName(session?.participant?.full_name);
 
   useEffect(() => {
     setOpen(false);
@@ -161,9 +163,21 @@ export default function Navbar() {
               {accountOpen && (
                 <div className="nav-account-dropdown" role="menu">
                   <div className="nav-account-summary">
-                    <strong>{session.participant.full_name}</strong>
+                    <strong>
+                      {session.participant.username
+                        ? `@${session.participant.username}`
+                        : session.participant.full_name}
+                    </strong>
                     <span>{session.participant.email}</span>
                   </div>
+                  <NavLink
+                    to="/settings"
+                    role="menuitem"
+                    className="nav-account-link"
+                    onClick={() => setAccountOpen(false)}
+                  >
+                    Settings
+                  </NavLink>
                   <button type="button" role="menuitem" onClick={handleLogout}>
                     Log out
                   </button>

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { api } from "../api";
 
 let googleScriptPromise = null;
-const GOOGLE_SCRIPT_SRC = "https://accounts.google.com/gsi/client";
+const GOOGLE_SCRIPT_SRC = "https://accounts.google.com/gsi/client?hl=en";
 const GOOGLE_SCRIPT_TIMEOUT_MS = 7000;
 const GOOGLE_SETUP_TIMEOUT_MS = 10000;
 const GOOGLE_SETUP_TIMEOUT_MESSAGE =
@@ -76,8 +76,9 @@ function loadGoogleScript() {
 function getGoogleButtonWidth(element) {
   const measuredWidth = Math.floor(element.getBoundingClientRect().width);
   if (!Number.isFinite(measuredWidth) || measuredWidth <= 0) {
-    return 360;
+    return 320;
   }
+  // GIS accepts up to 400px; clamp so the button fills the panel when possible.
   return Math.min(Math.max(measuredWidth, 240), 400);
 }
 
@@ -158,6 +159,8 @@ export default function GoogleSignInButton({ onCredential, context = "signin" })
         },
         ux_mode: "popup",
         context,
+        // Keep button copy in English to match the rest of the site.
+        locale: "en",
       });
 
       buttonRef.current.innerHTML = "";
@@ -169,6 +172,7 @@ export default function GoogleSignInButton({ onCredential, context = "signin" })
         shape: "pill",
         width: getGoogleButtonWidth(buttonRef.current),
         logo_alignment: "left",
+        locale: "en",
       });
 
       setStatus({ loading: false, error: "", enabled: true, helper: "" });

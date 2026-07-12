@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { api } from "../api";
 import { loadParticipantSession, saveParticipantSession } from "../auth";
 import GoogleSignInButton from "../components/GoogleSignInButton";
+import { isProfileComplete } from "../registrationOptions";
 
 const initialState = {
   email: "",
@@ -21,6 +22,15 @@ export default function Login() {
     setForm((current) => ({ ...current, [name]: value }));
   }
 
+  function afterAuth(auth) {
+    saveParticipantSession(auth);
+    if (!isProfileComplete(auth.participant)) {
+      navigate("/register");
+      return;
+    }
+    navigate("/bridge");
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
@@ -28,8 +38,7 @@ export default function Login() {
 
     try {
       const auth = await api.loginParticipant(form);
-      saveParticipantSession(auth);
-      navigate("/bridge");
+      afterAuth(auth);
     } catch (err) {
       setError(err.message || "Unable to log in");
     } finally {
@@ -45,8 +54,7 @@ export default function Login() {
       const auth = await api.loginParticipantWithGoogle({
         credential: response.credential,
       });
-      saveParticipantSession(auth);
-      navigate("/bridge");
+      afterAuth(auth);
     } catch (err) {
       setError(err.message || "Unable to log in with Google");
     } finally {
@@ -55,9 +63,9 @@ export default function Login() {
   }
 
   return (
-    <div className="page narrow auth-page">
+    <div className="page auth-page">
       <section className="auth-hero">
-        <div className="section-label">Feature 1</div>
+        <div className="section-label">Account</div>
         <h1>Log in to your Bridge Circle account</h1>
         <p className="lead">
           Access your participant profile and stay inside the T.U.L.A.Y. journey without
@@ -78,7 +86,7 @@ export default function Login() {
           )}
           {error && <div className="alert error">{error}</div>}
           <GoogleSignInButton onCredential={handleGoogleCredential} context="signin" />
-          <div className="auth-divider">
+          <div className="auth-divider" role="separator">
             <span>Or continue with email</span>
           </div>
           <form className="form" onSubmit={handleSubmit}>
@@ -113,10 +121,10 @@ export default function Login() {
 
         <aside className="panel auth-side">
           <span className="badge">New here?</span>
-          <h2 className="panel-title">Create your account on-site</h2>
+          <h2 className="panel-title">Create your account</h2>
           <p>
-            Registration now happens directly in the website, including your top 3
-            interests, optional identity details, and what motivated you to join.
+            Register with email or Google, then complete the same Bridge Circle profile
+            used when joining an activity.
           </p>
           <Link className="btn btn-ghost" to="/register">
             Create an account

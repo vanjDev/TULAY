@@ -43,6 +43,16 @@ def run_migrations() -> None:
         )
     if "profile_picture_url" not in columns:
         statements.append("ALTER TABLE participants ADD COLUMN profile_picture_url VARCHAR(500)")
+    if "username" not in columns:
+        statements.append("ALTER TABLE participants ADD COLUMN username VARCHAR(40)")
+    if "course" not in columns:
+        statements.append("ALTER TABLE participants ADD COLUMN course VARCHAR(40)")
+    if "age" not in columns:
+        statements.append("ALTER TABLE participants ADD COLUMN age INTEGER")
+    if "other_interest" not in columns:
+        statements.append("ALTER TABLE participants ADD COLUMN other_interest VARCHAR(120)")
+    if "main_interest" not in columns:
+        statements.append("ALTER TABLE participants ADD COLUMN main_interest VARCHAR(80)")
 
     with engine.begin() as conn:
         for statement in statements:
@@ -51,5 +61,11 @@ def run_migrations() -> None:
             text(
                 "CREATE UNIQUE INDEX IF NOT EXISTS ix_participants_google_sub "
                 "ON participants (google_sub)"
+            )
+        )
+        conn.execute(
+            text(
+                "CREATE UNIQUE INDEX IF NOT EXISTS ix_participants_username "
+                "ON participants (username)"
             )
         )
