@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { getParticipantAuthEventName, loadParticipantSession } from "../auth";
 
 const primary = [
   { to: "/about", label: "About" },
@@ -14,7 +15,10 @@ const primary = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [session, setSession] = useState(() => loadParticipantSession());
   const location = useLocation();
+
+  const displayName = formatParticipantName(session?.participant?.full_name);
 
   useEffect(() => {
     setOpen(false);
@@ -26,6 +30,19 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  useEffect(() => {
+    const syncSession = () => setSession(loadParticipantSession());
+    const authEvent = getParticipantAuthEventName();
+
+    window.addEventListener("storage", syncSession);
+    window.addEventListener(authEvent, syncSession);
+
+    return () => {
+      window.removeEventListener("storage", syncSession);
+      window.removeEventListener(authEvent, syncSession);
+    };
+  }, []);
 
   return (
     <header className="nav">
@@ -84,6 +101,23 @@ export default function Navbar() {
               {link.label}
             </NavLink>
           ))}
+          <NavLink to="/login" className="nav-user-link" aria-label="Login or create an account">
+            <span className="nav-user-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth="1.8" />
+                <path
+                  d="M5 19C6.4 15.9 8.77 14.35 12 14.35C15.23 14.35 17.6 15.9 19 19"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
+            <span className="nav-user-copy">
+              <span className="nav-user-label">Account</span>
+              {displayName && <span className="nav-user-name">{displayName}</span>}
+            </span>
+          </NavLink>
           <NavLink to="/pledge" className="nav-cta">
             Leave a Plank
           </NavLink>
@@ -99,4 +133,13 @@ export default function Navbar() {
       )}
     </header>
   );
+}
+
+function formatParticipantName(fullName) {
+  if (!fullName) return "";
+
+  const words = fullName.trim().split(/\s+/).filter(Boolean);
+  if (!words.length) return "";
+
+  return words.slice(0, 2).join(" ");
 }

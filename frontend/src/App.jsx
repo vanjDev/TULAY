@@ -11,6 +11,8 @@ import Quiz from "./pages/Quiz";
 import Pledge from "./pages/Pledge";
 import Resources from "./pages/Resources";
 import Admin from "./pages/Admin";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 export default function App() {
   return (
@@ -26,6 +28,8 @@ export default function App() {
         <Route path="quiz" element={<Quiz />} />
         <Route path="pledge" element={<Pledge />} />
         <Route path="resources" element={<Resources />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
         <Route path="admin" element={<Admin />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>

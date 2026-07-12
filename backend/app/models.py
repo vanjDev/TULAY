@@ -45,3 +45,23 @@ class QuizScenario(Base):
     correct_option: Mapped[str] = mapped_column(String(1), nullable=False)
     explanation: Mapped[str] = mapped_column(Text, nullable=False)
     order_index: Mapped[int] = mapped_column(Integer, default=0)
+
+
+class Participant(Base):
+    __tablename__ = "participants"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    full_name: Mapped[str] = mapped_column(String(120), nullable=False)
+    email: Mapped[str] = mapped_column(String(255), unique=True, index=True, nullable=False)
+    password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
+    google_sub: Mapped[str | None] = mapped_column(String(255), unique=True, index=True, nullable=True)
+    email_verified: Mapped[bool] = mapped_column(Boolean, default=False)
+    profile_picture_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    basic_info: Mapped[str | None] = mapped_column(Text, nullable=True)
+    interest_1: Mapped[str] = mapped_column(String(80), nullable=False)
+    interest_2: Mapped[str] = mapped_column(String(80), nullable=False)
+    interest_3: Mapped[str] = mapped_column(String(80), nullable=False)
+    gender_identity: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    sexual_orientation: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    motivation: Mapped[str] = mapped_column(Text, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)

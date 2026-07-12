@@ -5,11 +5,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from .database import Base, SessionLocal, engine
-from .routers import admin, pledges, quiz, stories
+from .database import Base, SessionLocal, engine, run_migrations
+from .routers import admin, participants, pledges, quiz, stories
 from .seed import seed_if_empty
 
 Base.metadata.create_all(bind=engine)
+run_migrations()
 
 # frontend/dist — built React app (served by python main.py)
 FRONTEND_DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
@@ -32,6 +33,7 @@ app.include_router(stories.router)
 app.include_router(pledges.router)
 app.include_router(quiz.router)
 app.include_router(admin.router)
+app.include_router(participants.router)
 
 
 @app.on_event("startup")

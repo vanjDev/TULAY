@@ -68,7 +68,7 @@ export const bridgeCircleSteps = [
     n: 1,
     title: "Registration",
     subtitle: "Choose Your Path",
-    body: "Participants sign up via Google Form or the website, with optional basic info, top 3 interests, optional demographic details (including self-describe), and what motivated them to join.",
+    body: "Participants sign up directly on the website, with optional basic info, top 3 interests, optional demographic details (including self-describe), and what motivated them to join.",
   },
   {
     n: 2,

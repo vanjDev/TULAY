@@ -43,7 +43,7 @@ Microaggressions (jokes, “preferences,” everyday exclusion) keep many LGBTQI
 |--------|------|
 | Frontend | React + Vite + React Router |
 | Backend | FastAPI + SQLAlchemy + SQLite |
-| Auth (admin) | JWT + shared password |
+| Auth | Participant JWT + admin JWT |
 | Runner | `python main.py` on **port 5123** |
 
 ## Run (recommended)
@@ -83,6 +83,30 @@ python main.py --reload     # API auto-reload while developing
 - URL: http://127.0.0.1:5123/admin  
 - Default password: `tulay-admin`  
 - Env overrides: `TULAY_ADMIN_PASSWORD`, `TULAY_SECRET_KEY`
+
+### Participant auth
+
+- Email/password auth remains available on `/login` and `/register`
+- Google Sign-In is also available on those pages when `GOOGLE_CLIENT_ID` is configured
+- The backend verifies Google ID tokens server-side and then issues the app's own JWT
+
+### Environment variables
+
+- `TULAY_SECRET_KEY`
+  Used to sign the app's JWT tokens for participant and admin auth.
+- `TULAY_ADMIN_PASSWORD`
+  Overrides the default admin password.
+- `GOOGLE_CLIENT_ID`
+  Required to enable Google Sign-In with Google Identity Services. Use the Web application client ID from Google Cloud.
+- `GOOGLE_CLIENT_SECRET`
+  Not used by this GIS ID-token flow, so it does not need to be set.
+
+### Google Cloud setup
+
+1. Create or reuse a Google Cloud OAuth 2.0 client of type `Web application`.
+2. Add `http://127.0.0.1:5123` and any other local dev origin you use to `Authorized JavaScript origins`.
+3. Set `GOOGLE_CLIENT_ID` in your environment before starting `python main.py`.
+4. Keep using HTTPS and a production origin in deployment.
 
 ## Dev mode (optional split)
 

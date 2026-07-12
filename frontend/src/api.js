@@ -36,6 +36,22 @@ async function request(path, options = {}) {
 }
 
 export const api = {
+  getParticipantAuthConfig: () => request("/api/participants/auth-config"),
+  registerParticipant: (body) =>
+    request("/api/participants/register", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  loginParticipant: (body) =>
+    request("/api/participants/login", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  loginParticipantWithGoogle: (body) =>
+    request("/api/participants/google", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
   getStories: () => request("/api/stories"),
   submitStory: (body) =>
     request("/api/stories", { method: "POST", body: JSON.stringify(body) }),

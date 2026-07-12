@@ -94,3 +94,54 @@ class StatsOut(BaseModel):
     rejected_stories: int
     pledges: int
     quiz_scenarios: int
+
+
+class ParticipantRegister(BaseModel):
+    full_name: str = Field(min_length=2, max_length=120)
+    email: str = Field(min_length=5, max_length=255)
+    password: str = Field(min_length=8, max_length=128)
+    basic_info: str | None = Field(default=None, max_length=800)
+    interest_1: str = Field(min_length=2, max_length=80)
+    interest_2: str = Field(min_length=2, max_length=80)
+    interest_3: str = Field(min_length=2, max_length=80)
+    gender_identity: str | None = Field(default=None, max_length=120)
+    sexual_orientation: str | None = Field(default=None, max_length=120)
+    motivation: str = Field(min_length=10, max_length=1500)
+
+
+class ParticipantLogin(BaseModel):
+    email: str = Field(min_length=5, max_length=255)
+    password: str = Field(min_length=8, max_length=128)
+
+
+class GoogleAuthIn(BaseModel):
+    credential: str = Field(min_length=20)
+
+
+class AuthConfigOut(BaseModel):
+    google_client_id: str | None
+    google_enabled: bool
+
+
+class ParticipantOut(BaseModel):
+    id: int
+    full_name: str
+    email: str
+    email_verified: bool
+    profile_picture_url: str | None
+    basic_info: str | None
+    interest_1: str
+    interest_2: str
+    interest_3: str
+    gender_identity: str | None
+    sexual_orientation: str | None
+    motivation: str
+    created_at: datetime
+
+    model_config = {"from_attributes": True}
+
+
+class ParticipantAuthOut(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    participant: ParticipantOut
