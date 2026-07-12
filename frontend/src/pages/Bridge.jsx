@@ -21,22 +21,33 @@ const INTERESTS = [
 ];
 
 const COURSES = [
-  { code: "BSCS", name: "Computer Science" },
-  { code: "BSIT", name: "Information Technology" },
+  { code: "BSCSAI", name: "Artificial Intelligence" },
+  { code: "BSCSDS", name: "Data Science" },
+  { code: "BSCSSE", name: "Software Engineering" },
+  { code: "BSITCST", name: "Cybersecurity", note: "IT Specialization" },
+  { code: "BSITWMA", name: "Web and Mobile Application" },
+  { code: "BSITAGD", name: "Animation and Game Development" },
+  { code: "BSITBA", name: "Business Analytics" },
   { code: "BMA", name: "Multimedia Arts" },
-  { code: "BSCST", name: "Cybersecurity" },
+  { code: "BSCST", name: "Cybersecurity", note: "Degree Program" },
   { code: "BDMM", name: "Digital Marketing and Management" },
   { code: "BSFINTECH", name: "Financial Technology Engineering" },
   { code: "BSCEM", name: "Construction Engineering and Management" },
-  { code: "BSCE", name: "Civil Engineering" },
-  { code: "BSCpE", name: "Computer Engineering" },
+  { code: "BSCESE", name: "Structural Engineering" },
+  { code: "BSCEWRE", name: "Water Resources Engineering" },
+  { code: "BSCpEIDA", name: "Internet of Things (IoT) & Data Analytics" },
+  { code: "BSCpENAC", name: "Network Administration and Cybersecurity" },
   { code: "BSEE", name: "Electrical Engineering" },
-  { code: "BSECE", name: "Electronics Engineering" },
-  { code: "BSME", name: "Mechanical Engineering" },
+  { code: "BSECECE", name: "Communications Engineering" },
+  { code: "BSECEIC", name: "Instrumentation and Control" },
+  { code: "BSMEMECH", name: "Mechatronics" },
+  { code: "BSMEMSE", name: "Materials Science and Engineering" },
 ].map((course) => ({
   ...course,
   value: course.code,
-  label: `${course.code} - ${course.name}`,
+  label: course.note
+    ? `${course.code} - ${course.name} (${course.note})`
+    : `${course.code} - ${course.name}`,
 }));
 
 const GENDER_IDENTITIES = [
