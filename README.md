@@ -92,6 +92,10 @@ python main.py --reload     # API auto-reload while developing
 
 ### Environment variables
 
+The repo root `.env` is loaded automatically by both `python main.py` and the
+split backend command (`uvicorn app.main:app`). Copy `.env.example` if you need
+to recreate it.
+
 - `TULAY_SECRET_KEY`
   Used to sign the app's JWT tokens for participant and admin auth.
 - `TULAY_ADMIN_PASSWORD`
@@ -105,7 +109,7 @@ python main.py --reload     # API auto-reload while developing
 
 1. Create or reuse a Google Cloud OAuth 2.0 client of type `Web application`.
 2. Add `http://127.0.0.1:5123` and any other local dev origin you use to `Authorized JavaScript origins`.
-3. Set `GOOGLE_CLIENT_ID` in your environment before starting `python main.py`.
+3. Set `GOOGLE_CLIENT_ID` in `.env`, then restart `python main.py`.
 4. Keep using HTTPS and a production origin in deployment.
 
 ## Dev mode (optional split)

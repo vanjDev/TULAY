@@ -5,6 +5,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
+from .env import load_env_file
+
+load_env_file()
+
 from .database import Base, SessionLocal, engine, run_migrations
 from .routers import admin, participants, pledges, quiz, stories
 from .seed import seed_if_empty

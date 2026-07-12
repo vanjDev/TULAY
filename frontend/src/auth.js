@@ -6,6 +6,11 @@ export function saveParticipantSession(payload) {
   window.dispatchEvent(new CustomEvent(AUTH_EVENT, { detail: payload }));
 }
 
+export function clearParticipantSession() {
+  localStorage.removeItem(AUTH_KEY);
+  window.dispatchEvent(new CustomEvent(AUTH_EVENT, { detail: null }));
+}
+
 export function loadParticipantSession() {
   const raw = localStorage.getItem(AUTH_KEY);
   if (!raw) return null;

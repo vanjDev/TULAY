@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Project T.U.L.A.Y. — single-command runner.
+Project T.U.L.A.Y. - single-command runner.
 
 Usage:
     python main.py
@@ -29,7 +29,12 @@ FRONTEND = ROOT / "frontend"
 DIST = FRONTEND / "dist"
 DEFAULT_PORT = 5123
 
-# Watched paths — if any are newer than dist/index.html, rebuild
+sys.path.insert(0, str(BACKEND))
+from app.env import load_env_file
+
+load_env_file(ROOT / ".env")
+
+# Watched paths: if any are newer than dist/index.html, rebuild
 SOURCE_GLOBS = (
     "src/**/*",
     "public/**/*",
@@ -46,7 +51,7 @@ def _which(cmd: str) -> str | None:
 
 
 def _run(cmd: list[str], cwd: Path) -> None:
-    print(f"\n→ {' '.join(cmd)}  (in {cwd})")
+    print(f"\n> {' '.join(cmd)}  (in {cwd})")
     subprocess.run(cmd, cwd=str(cwd), check=True)
 
 
@@ -101,13 +106,13 @@ def build_frontend() -> None:
         )
         sys.exit(1)
 
-    print("Building React frontend…")
+    print("Building React frontend...")
     if not (FRONTEND / "node_modules").is_dir():
         _run([npm, "install"], FRONTEND)
     _run([npm, "run", "build"], FRONTEND)
 
     if not index.is_file():
-        print("ERROR: frontend build failed — index.html not found.", file=sys.stderr)
+        print("ERROR: frontend build failed - index.html not found.", file=sys.stderr)
         sys.exit(1)
     print("Frontend build ready.")
 
@@ -176,7 +181,6 @@ def main() -> None:
     ensure_frontend(force_build=args.build, skip_build=args.no_build)
 
     # Import app from backend package
-    sys.path.insert(0, str(BACKEND))
     try:
         import uvicorn
     except ImportError:
@@ -200,17 +204,17 @@ def main() -> None:
             else:
                 venv_python = venv_site / "bin" / "python"
             if venv_python.is_file():
-                print(f"Re-launching with {venv_python} …")
+                print(f"Re-launching with {venv_python}...")
                 os.execv(
                     str(venv_python),
                     [str(venv_python), str(ROOT / "main.py"), *sys.argv[1:]],
                 )
 
     print("\n" + "=" * 52)
-    print("  Project T.U.L.A.Y.  ·  For students")
-    print(f"  Open →  http://{args.host}:{args.port}")
-    print(f"  API  →  http://{args.host}:{args.port}/api/health")
-    print(f"  Docs →  http://{args.host}:{args.port}/docs")
+    print("  Project T.U.L.A.Y.  -  For students")
+    print(f"  Open ->  http://{args.host}:{args.port}")
+    print(f"  API  ->  http://{args.host}:{args.port}/api/health")
+    print(f"  Docs ->  http://{args.host}:{args.port}/docs")
     print("=" * 52 + "\n")
 
     uvicorn.run(
