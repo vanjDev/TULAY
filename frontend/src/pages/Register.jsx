@@ -138,13 +138,19 @@ export default function Register() {
         <div className="panel auth-panel">
           <h2 className="panel-title">Step 1 — Account basics</h2>
           <p className="muted">
-            Email and password, or continue with Google. Bridge profile comes next.
+            Start with Google in one tap, or register with email. Bridge profile comes next.
           </p>
           {error && <div className="alert error">{error}</div>}
-          <GoogleSignInButton onCredential={handleGoogleCredential} context="signup" />
+
+          <div className="auth-social">
+            <p className="auth-social-label">Quick sign-up</p>
+            <GoogleSignInButton onCredential={handleGoogleCredential} context="signup" />
+          </div>
+
           <div className="auth-divider" role="separator">
             <span>Or register with email</span>
           </div>
+
           <form className="form" onSubmit={handleSubmit}>
             <label>
               Full name

@@ -77,7 +77,7 @@ export default function Login() {
         <div className="panel auth-panel">
           <h2 className="panel-title">Welcome back</h2>
           <p className="muted">
-            Use the email and password you created during registration.
+            Sign in with Google, or use the email and password from registration.
           </p>
           {session?.participant && (
             <div className="alert success">
@@ -85,10 +85,16 @@ export default function Login() {
             </div>
           )}
           {error && <div className="alert error">{error}</div>}
-          <GoogleSignInButton onCredential={handleGoogleCredential} context="signin" />
+
+          <div className="auth-social">
+            <p className="auth-social-label">Quick sign-in</p>
+            <GoogleSignInButton onCredential={handleGoogleCredential} context="signin" />
+          </div>
+
           <div className="auth-divider" role="separator">
             <span>Or continue with email</span>
           </div>
+
           <form className="form" onSubmit={handleSubmit}>
             <label>
               Email address

@@ -76,10 +76,10 @@ function loadGoogleScript() {
 function getGoogleButtonWidth(element) {
   const measuredWidth = Math.floor(element.getBoundingClientRect().width);
   if (!Number.isFinite(measuredWidth) || measuredWidth <= 0) {
-    return 320;
+    return 280;
   }
-  // GIS accepts up to 400px; clamp so the button fills the panel when possible.
-  return Math.min(Math.max(measuredWidth, 240), 400);
+  // GIS max width is 400; keep a comfortable centered pill size.
+  return Math.min(Math.max(measuredWidth, 260), 320);
 }
 
 export default function GoogleSignInButton({ onCredential, context = "signin" }) {
@@ -164,11 +164,13 @@ export default function GoogleSignInButton({ onCredential, context = "signin" })
       });
 
       buttonRef.current.innerHTML = "";
+      const buttonText =
+        context === "signup" ? "signup_with" : context === "signin" ? "signin_with" : "continue_with";
       google.accounts.id.renderButton(buttonRef.current, {
         type: "standard",
         theme: "outline",
         size: "large",
-        text: "continue_with",
+        text: buttonText,
         shape: "pill",
         width: getGoogleButtonWidth(buttonRef.current),
         logo_alignment: "left",
@@ -190,11 +192,11 @@ export default function GoogleSignInButton({ onCredential, context = "signin" })
       {status.loading || status.enabled ? (
         <div ref={buttonRef} className="google-signin-slot" />
       ) : (
-        <button type="button" className="btn btn-ghost btn-block google-fallback-button" disabled>
+        <button type="button" className="btn btn-ghost google-fallback-button" disabled>
           <span className="google-mark" aria-hidden="true">
             G
           </span>
-          Continue with Google
+          {context === "signup" ? "Sign up with Google" : "Sign in with Google"}
         </button>
       )}
       {status.loading && <p className="muted auth-inline-note">Loading Google Sign-In...</p>}
