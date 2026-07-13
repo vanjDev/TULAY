@@ -3327,6 +3327,9 @@ body {
 .dock-item:hover, .dock-item.active { color: var(--forest) !important; background: var(--gold-soft); }
 
 @media (max-width: 960px) {
+  /* backdrop-filter creates a containing block for fixed children in mobile browsers.
+     Without this override, the expanded menu and its backdrop are clipped to the header. */
+  .nav { backdrop-filter: none; }
   .nav-links { top: var(--nav-h); background: var(--cream); border-bottom: 1px solid var(--border); padding: 1.2rem 1.35rem 2rem; }
   .hero, .home-hero, .page-hero-band, .page-hero-with-art { grid-template-columns: 1fr; gap: 2rem; }
   .hero-copy { max-width: 40rem; }
