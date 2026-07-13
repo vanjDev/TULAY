@@ -3038,8 +3038,12 @@ body {
 
 .tulay-logo { display: inline-flex; align-items: center; gap: 0.72rem; color: var(--forest); }
 .tulay-logo-dark { color: var(--cream); }
-.tulay-logo-mark { width: 3.15rem; height: 2rem; overflow: visible; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; flex: 0 0 auto; }
-.tulay-logo-mark circle { fill: currentColor; stroke: none; }
+.tulay-logo-mark {
+  width: 2.9rem;
+  height: 2.9rem;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
 .tulay-logo-copy { display: flex; flex-direction: column; gap: 0.12rem; line-height: 1.05; }
 .tulay-logo-copy strong { color: currentColor; font-family: var(--display); font-size: 1.4rem; font-weight: 600; letter-spacing: -0.02em; }
 .tulay-logo-copy small { color: currentColor; opacity: 0.68; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -3065,9 +3069,26 @@ body {
 .hero-body, .lead { max-width: 34rem; color: var(--text-soft); font-size: 1.05rem; line-height: 1.65; }
 .hero-visual, .hero-visual-img { min-height: 0; align-self: stretch; }
 .hero-art, .page-hero-art { display: block; width: 100%; height: 100%; min-height: 27rem; object-fit: cover; border-radius: 2rem; box-shadow: none; }
-.hero-visual-img { display: flex; flex-direction: column; gap: 0.8rem; }
-.hero-visual-img .hero-art { min-height: 30rem; }
-.hero-visual-img figcaption { color: var(--muted); font-size: 0.78rem; letter-spacing: 0.01em; }
+.hero-visual-img {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.hero-visual-img .hero-art {
+  min-height: 30rem;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: var(--shadow);
+}
+.hero-visual-img figcaption {
+  padding-inline: 0.2rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+}
 .hero-float-card { display: none; }
 
 .btn-row { gap: 0.8rem; margin-top: 1.55rem; }
@@ -3250,7 +3271,7 @@ body {
   }
 
   .nav-inner { padding-inline: 1rem; }
-  .tulay-logo-mark { width: 2.75rem; }
+  .tulay-logo-mark { width: 2.55rem; height: 2.55rem; }
   .tulay-logo-copy strong { font-size: 1.2rem; }
   .tulay-logo-copy small { font-size: 0.58rem; }
   .page, .home-page { padding-top: 3.2rem; padding-bottom: 4rem; }
