@@ -54,6 +54,11 @@ def run_migrations() -> None:
     if "main_interest" not in columns:
         statements.append("ALTER TABLE participants ADD COLUMN main_interest VARCHAR(80)")
 
+    if "pledges" in inspector.get_table_names():
+        pledge_columns = {column["name"] for column in inspector.get_columns("pledges")}
+        if "participant_id" not in pledge_columns:
+            statements.append("ALTER TABLE pledges ADD COLUMN participant_id INTEGER")
+
     with engine.begin() as conn:
         for statement in statements:
             conn.execute(text(statement))
@@ -61,6 +66,12 @@ def run_migrations() -> None:
             text(
                 "CREATE UNIQUE INDEX IF NOT EXISTS ix_participants_google_sub "
                 "ON participants (google_sub)"
+            )
+        )
+        conn.execute(
+            text(
+                "CREATE INDEX IF NOT EXISTS ix_pledges_participant_id "
+                "ON pledges (participant_id)"
             )
         )
         conn.execute(

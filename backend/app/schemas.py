@@ -38,7 +38,6 @@ class StoryAdminOut(StoryOut):
 
 
 class PledgeCreate(BaseModel):
-    display_name: str | None = Field(default="Anonymous", max_length=80)
     message: str | None = Field(default=None, max_length=500)
 
 

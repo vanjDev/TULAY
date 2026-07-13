@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { api } from "../api";
+import { loadParticipantSession } from "../auth";
 
 const DEFAULT =
   "I leave this plank to include, not only tolerate — to listen before I joke, and to help classmates belong.";
 
 export default function Pledge() {
   const [pledges, setPledges] = useState([]);
-  const [display_name, setName] = useState("");
   const [message, setMessage] = useState(DEFAULT);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
+  const session = loadParticipantSession();
+  const participant = session?.participant;
 
   async function load() {
     setLoading(true);
@@ -32,12 +35,9 @@ export default function Pledge() {
     setStatus("");
     setError("");
     try {
-      const res = await api.createPledge({
-        display_name: display_name || "Anonymous",
-        message,
-      });
+      if (!session?.access_token) return;
+      const res = await api.createPledge(session.access_token, { message });
       setStatus(res.message);
-      setName("");
       setMessage(DEFAULT);
       await load();
     } catch (err) {
@@ -53,7 +53,7 @@ export default function Pledge() {
           <h1>Leave your plank</h1>
           <p className="lead">
             Digital commitment planks — the online twin of the bridge display at
-            Bridge to Belonging. Name, nickname, initials, or anonymous.
+            Bridge to Belonging. Sign in to leave your mark.
           </p>
         </header>
         <img
@@ -98,7 +98,21 @@ export default function Pledge() {
 
         <aside className="share-panel">
           <h2>Write your plank</h2>
+          {!participant ? (
+            <div className="form">
+              <p className="share-note">Sign in with your student account to add a pledge.</p>
+              <Link className="btn btn-primary btn-block" to="/login">
+                Sign in to pledge
+              </Link>
+              <Link className="btn btn-ghost btn-block" to="/register">
+                Create an account
+              </Link>
+            </div>
+          ) : (
           <form className="form" onSubmit={onSubmit}>
+            <p className="share-note">
+              Pledging as <strong>{participant.username || participant.full_name}</strong>.
+            </p>
             <label>
               Your commitment to inclusion
               <textarea
@@ -108,18 +122,11 @@ export default function Pledge() {
                 required
               />
             </label>
-            <label>
-              Display name (optional)
-              <input
-                value={display_name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Anonymous / nickname"
-              />
-            </label>
             <button className="btn btn-primary btn-block" type="submit">
               Attach my plank
             </button>
           </form>
+          )}
           {status && <p className="alert success" role="status">{status}</p>}
           {error && <p className="alert error" role="alert">{error}</p>}
         </aside>

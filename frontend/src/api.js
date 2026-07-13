@@ -77,8 +77,12 @@ export const api = {
     request("/api/stories", { method: "POST", body: JSON.stringify(body) }),
   relateStory: (id) => request(`/api/stories/${id}/relate`, { method: "POST" }),
   getPledges: () => request("/api/pledges"),
-  createPledge: (body) =>
-    request("/api/pledges", { method: "POST", body: JSON.stringify(body) }),
+  createPledge: (token, body) =>
+    request("/api/pledges", {
+      method: "POST",
+      headers: authHeaders(token),
+      body: JSON.stringify(body),
+    }),
   getQuiz: () => request("/api/quiz/scenarios"),
   answerQuiz: (body) =>
     request("/api/quiz/answer", { method: "POST", body: JSON.stringify(body) }),

@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from sqlalchemy import Boolean, DateTime, Integer, String, Text
+from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .database import Base
@@ -27,6 +27,9 @@ class Pledge(Base):
     __tablename__ = "pledges"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    participant_id: Mapped[int | None] = mapped_column(
+        ForeignKey("participants.id"), nullable=True, index=True
+    )
     display_name: Mapped[str] = mapped_column(String(80), default="Anonymous")
     message: Mapped[str] = mapped_column(Text, nullable=False)
     is_visible: Mapped[bool] = mapped_column(Boolean, default=True)
