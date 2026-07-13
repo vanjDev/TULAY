@@ -10,6 +10,41 @@ const OPTION_TONES = {
   c: "lilac",
   d: "sand",
 };
+const SCENARIO_ART = [
+  {
+    src: "/art/v2/quiz-scenarios/scenario-01.webp",
+    alt: "A concerned classmate checks on a student who looks uncomfortable while others laugh nearby",
+  },
+  {
+    src: "/art/v2/quiz-scenarios/scenario-02.webp",
+    alt: "Students react to a group chat while one classmate calmly signals that a harmful post is not okay",
+  },
+  {
+    src: "/art/v2/quiz-scenarios/scenario-03.webp",
+    alt: "A classmate steps in as another student leans away from unwanted touching",
+  },
+  {
+    src: "/art/v2/quiz-scenarios/scenario-04.webp",
+    alt: "Friends discuss equal respect while a same-gender couple sits comfortably together on campus",
+  },
+  {
+    src: "/art/v2/quiz-scenarios/scenario-05.webp",
+    alt: "A student supports a targeted classmate and points toward a trusted campus staff member",
+  },
+  {
+    src: "/art/v2/quiz-scenarios/scenario-06.webp",
+    alt: "A classmate redirects attention toward a student presenting while others react dismissively",
+  },
+];
+
+function scrollQuizIntoView() {
+  if (typeof window === "undefined") return;
+  const shell = document.querySelector(".choice-quiz-shell");
+  if (!shell) return;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const top = shell.getBoundingClientRect().top + window.scrollY - 88;
+  window.scrollTo({ top: Math.max(0, top), behavior: reducedMotion ? "auto" : "smooth" });
+}
 
 export default function Quiz() {
   const [scenarios, setScenarios] = useState([]);
@@ -31,9 +66,18 @@ export default function Quiz() {
   }, []);
 
   const current = scenarios[index];
+  const currentArt = SCENARIO_ART[index] ?? SCENARIO_ART[0];
   const progress = scenarios.length
     ? Math.round(((index + (feedback ? 1 : 0)) / scenarios.length) * 100)
     : 0;
+
+  useEffect(() => {
+    const nextArt = SCENARIO_ART[index + 1];
+    if (!nextArt || typeof Image === "undefined") return undefined;
+    const image = new Image();
+    image.src = nextArt.src;
+    return undefined;
+  }, [index]);
 
   async function choose(selected) {
     if (!current || feedback || submitting) return;
@@ -61,6 +105,9 @@ export default function Quiz() {
     }
     setIndex((i) => i + 1);
     setFeedback(null);
+    if (typeof window !== "undefined") {
+      window.requestAnimationFrame(scrollQuizIntoView);
+    }
   }
 
   function restart() {
@@ -70,6 +117,9 @@ export default function Quiz() {
     setAnswered(0);
     setSubmitting(false);
     setDone(false);
+    if (typeof window !== "undefined") {
+      window.requestAnimationFrame(scrollQuizIntoView);
+    }
   }
 
   if (loading) {
@@ -170,8 +220,11 @@ export default function Quiz() {
             <h2 id="scenario-heading">{current.situation}</h2>
             <figure className="choice-scene">
               <img
-                src="/art/v2/quiz.png"
-                alt="A student reflecting while considering four symbolic choices"
+                src={currentArt.src}
+                alt={currentArt.alt}
+                width="1200"
+                height="800"
+                decoding="async"
               />
               <figcaption>Pause. Notice. Choose with care.</figcaption>
             </figure>
