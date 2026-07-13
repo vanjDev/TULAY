@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 
-from sqlalchemy import Boolean, DateTime, Integer, String, Text
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, String, Text
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .database import Base
 
@@ -71,3 +71,46 @@ class Participant(Base):
     sexual_orientation: Mapped[str | None] = mapped_column(String(120), nullable=True)
     motivation: Mapped[str] = mapped_column(Text, default="", nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class QuizV2Choices(Base):
+    __tablename__ = "quiz_v2_choices"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    q1: Mapped[str] = mapped_column(Text, nullable=False)
+    q2: Mapped[str] = mapped_column(Text, nullable=False)
+    q3: Mapped[str] = mapped_column(Text, nullable=False)
+    q4: Mapped[str] = mapped_column(Text, nullable=False)
+
+
+class QuizV2Data(Base):
+    __tablename__ = "quiz_v2_data"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    q1: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    q2: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    q3: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    q4: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+
+
+class QuizV2Responses(Base):
+    __tablename__ = "quiz_v2_responses"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    q1: Mapped[str] = mapped_column(Text, nullable=False)
+    q2: Mapped[str] = mapped_column(Text, nullable=False)
+    q3: Mapped[str] = mapped_column(Text, nullable=False)
+    q4: Mapped[str] = mapped_column(Text, nullable=False)
+
+
+class QuizV2(Base):
+    __tablename__ = "quiz_v2"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    question: Mapped[str] = mapped_column(Text, nullable=False)
+    choices_id: Mapped[int] = mapped_column("choices", ForeignKey("quiz_v2_choices.id"))
+    responses_id: Mapped[int] = mapped_column("responses", ForeignKey("quiz_v2_responses.id"))
+    data_id: Mapped[int] = mapped_column("data", ForeignKey("quiz_v2_data.id"))
+    choices: Mapped[QuizV2Choices] = relationship("QuizV2Choices", lazy="joined")
+    responses: Mapped[QuizV2Responses] = relationship("QuizV2Responses", lazy="joined")
+    data: Mapped[QuizV2Data] = relationship("QuizV2Data", lazy="joined")

@@ -10,7 +10,7 @@ from .env import load_env_file
 load_env_file()
 
 from .database import Base, SessionLocal, engine, run_migrations
-from .routers import admin, participants, pledges, quiz, stories
+from .routers import admin, participants, pledges, quiz, quiz_v2, stories
 from .seed import seed_if_empty
 
 Base.metadata.create_all(bind=engine)
@@ -36,6 +36,7 @@ app.add_middleware(
 app.include_router(stories.router)
 app.include_router(pledges.router)
 app.include_router(quiz.router)
+app.include_router(quiz_v2.router)
 app.include_router(admin.router)
 app.include_router(participants.router)
 

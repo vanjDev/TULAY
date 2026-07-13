@@ -75,6 +75,22 @@ class QuizFeedback(BaseModel):
     selected: str
 
 
+class QuizV2Item(BaseModel):
+    id: int
+    question: str
+    choices: dict[str, str]
+
+
+class QuizV2Answer(BaseModel):
+    question_id: int
+    answer: int
+
+
+class QuizV2Outcome(BaseModel):
+    opinion: str
+    data: dict[str, int]
+
+
 class AdminLogin(BaseModel):
     password: str
 
