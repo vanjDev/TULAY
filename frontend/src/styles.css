@@ -3373,26 +3373,36 @@ body {
 
 /* ——— Choice Table quiz ——— */
 .choice-quiz-page {
-  padding-top: 3.2rem;
+  padding-top: 2.2rem;
   padding-bottom: 5.5rem;
+}
+
+.choice-quiz-shell {
+  padding: clamp(1.35rem, 2.8vw, 2.35rem);
+  border: 1px solid rgba(11, 58, 48, 0.12);
+  border-radius: 28px;
+  background: rgba(255, 253, 249, 0.78);
+  box-shadow: 0 22px 60px rgba(11, 58, 48, 0.07);
+  backdrop-filter: blur(10px);
 }
 
 .choice-quiz-header {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.65fr);
-  gap: 3rem;
-  align-items: end;
-  margin-bottom: 1.8rem;
+  grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.72fr);
+  gap: 2rem;
+  align-items: center;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(11, 58, 48, 0.1);
 }
 
 .choice-quiz-header h1 {
-  margin: 0.45rem 0 0;
+  margin: 0.32rem 0 0;
   color: var(--forest);
   font-family: var(--display);
-  font-size: clamp(3.5rem, 6vw, 5.7rem);
+  font-size: clamp(2.35rem, 3.5vw, 3.35rem);
   font-weight: 600;
-  letter-spacing: -0.055em;
-  line-height: 0.92;
+  letter-spacing: -0.045em;
+  line-height: 0.96;
 }
 
 .choice-quiz-progress {
@@ -3400,7 +3410,6 @@ body {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.9rem;
   align-items: center;
-  padding-bottom: 0.5rem;
 }
 
 .choice-quiz-progress .progress-track {
@@ -3422,9 +3431,10 @@ body {
 
 .choice-table {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(24rem, 0.92fr);
-  gap: clamp(3rem, 6vw, 6rem);
-  align-items: center;
+  grid-template-columns: minmax(0, 0.9fr) minmax(24rem, 1.1fr);
+  gap: clamp(2rem, 3.5vw, 3.25rem);
+  align-items: start;
+  padding-top: 1.55rem;
   animation: choice-table-enter 0.5s var(--ease) both;
 }
 
@@ -3443,14 +3453,14 @@ body {
 }
 
 .choice-table-story h2 {
-  max-width: 46rem;
-  margin: 0.65rem 0 1.45rem;
+  max-width: 38rem;
+  margin: 0.45rem 0 0.95rem;
   color: var(--forest);
   font-family: var(--display);
-  font-size: clamp(2rem, 3.35vw, 3.35rem);
+  font-size: clamp(1.7rem, 2.2vw, 2.15rem);
   font-weight: 600;
-  letter-spacing: -0.035em;
-  line-height: 1.06;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
 }
 
 .choice-scene {
@@ -3465,10 +3475,11 @@ body {
 .choice-scene img {
   display: block;
   width: 100%;
-  min-height: 27rem;
-  max-height: 32rem;
+  height: 15rem;
+  min-height: 15rem;
+  max-height: 15rem;
   object-fit: cover;
-  object-position: left center;
+  object-position: left 46%;
   transform: scale(1.015);
   animation: choice-scene-breathe 9s ease-in-out infinite alternate;
 }
@@ -3491,6 +3502,7 @@ body {
 .choice-table-actions {
   position: relative;
   min-width: 0;
+  align-self: start;
 }
 
 .choice-instruction {
@@ -3499,21 +3511,21 @@ body {
 
 .choice-option-list {
   display: grid;
-  gap: 0.72rem;
+  gap: 0.68rem;
 }
 
 .choice-option {
   --choice-accent: var(--forest);
   position: relative;
   display: grid;
-  grid-template-columns: 3.15rem minmax(0, 1fr) 1.6rem;
-  gap: 1rem;
+  grid-template-columns: 2.8rem minmax(0, 1fr) 1.5rem;
+  gap: 0.85rem;
   align-items: center;
-  min-height: 6.4rem;
-  padding: 0.8rem 1rem 0.8rem 0.8rem;
-  border: 1px solid color-mix(in srgb, var(--choice-accent) 22%, transparent);
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--choice-accent) 7%, var(--ivory));
+  min-height: 4.65rem;
+  padding: 0.65rem 0.9rem 0.65rem 0.7rem;
+  border: 1px solid rgba(11, 58, 48, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.62);
   color: var(--forest);
   font: inherit;
   text-align: left;
@@ -3533,10 +3545,10 @@ body {
 .choice-option:hover:not(:disabled),
 .choice-option:focus-visible {
   z-index: 1;
-  transform: translateX(-4px) translateY(-2px);
+  transform: translateY(-2px);
   border-color: var(--choice-accent);
-  background: color-mix(in srgb, var(--choice-accent) 11%, var(--ivory));
-  box-shadow: 0 10px 28px color-mix(in srgb, var(--choice-accent) 13%, transparent);
+  background: color-mix(in srgb, var(--choice-accent) 7%, var(--ivory));
+  box-shadow: 0 9px 24px color-mix(in srgb, var(--choice-accent) 11%, transparent);
   outline: none;
 }
 
@@ -3547,7 +3559,7 @@ body {
 .choice-option.is-selected,
 .choice-option.is-correct {
   border-color: var(--choice-accent);
-  background: color-mix(in srgb, var(--choice-accent) 14%, var(--ivory));
+  background: color-mix(in srgb, var(--choice-accent) 10%, var(--ivory));
 }
 
 .choice-option.is-wrong {
@@ -3557,9 +3569,9 @@ body {
 .choice-key {
   display: grid;
   place-items: center;
-  width: 3.15rem;
-  height: 3.15rem;
-  border-radius: 12px;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 10px;
   background: var(--choice-accent);
   color: var(--white);
   font-size: 0.86rem;
@@ -3569,9 +3581,9 @@ body {
 
 .choice-copy {
   color: var(--forest);
-  font-size: 0.95rem;
+  font-size: 0.91rem;
   font-weight: 650;
-  line-height: 1.45;
+  line-height: 1.38;
 }
 
 .choice-radio {
@@ -3589,42 +3601,25 @@ body {
   height: 1.2rem;
 }
 
-.choice-connector {
-  position: absolute;
-  left: -3.25rem;
-  top: 50%;
-  width: 3.25rem;
-  height: 1px;
-  overflow: visible;
-  background: var(--choice-accent);
-  transform: scaleX(0);
-  transform-origin: right center;
-  animation: choice-connector-draw 0.45s var(--ease) forwards;
-  animation-delay: calc(0.2s + (var(--choice-order) * 0.07s));
-}
-
-.choice-connector::before {
-  content: "";
-  position: absolute;
-  left: -0.28rem;
-  top: -0.27rem;
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  background: var(--choice-accent);
-}
-
 .choice-guidance,
 .choice-feedback {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 1rem;
   align-items: center;
-  margin-top: 1.7rem;
+  margin-top: 1.4rem;
   padding: 1rem 1.15rem;
   border: 1px solid var(--border);
   border-radius: 16px;
   background: rgba(255, 253, 249, 0.78);
+}
+
+.choice-guidance {
+  padding: 1.1rem 0 0;
+  border: 0;
+  border-top: 1px solid rgba(11, 58, 48, 0.1);
+  border-radius: 0;
+  background: transparent;
 }
 
 .choice-guidance > svg,
@@ -3738,10 +3733,6 @@ body {
   to { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes choice-connector-draw {
-  to { transform: scaleX(1); }
-}
-
 @keyframes choice-scene-breathe {
   from { transform: scale(1.015); }
   to { transform: scale(1.035); }
@@ -3764,40 +3755,57 @@ body {
 
   .choice-table {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.6rem;
   }
 
   .choice-scene img {
-    min-height: 23rem;
-    max-height: 28rem;
+    height: 15rem;
+    min-height: 15rem;
+    max-height: 15rem;
   }
 
   .choice-table-actions {
-    padding-left: 2rem;
+    padding-left: 0;
   }
 }
 
 @media (max-width: 560px) {
   .choice-quiz-page {
-    padding-top: 2.5rem;
+    padding-top: 1.5rem;
+  }
+
+  .choice-quiz-shell {
+    padding: 1.15rem;
+    border-radius: 20px;
   }
 
   .choice-quiz-header h1 {
-    font-size: 3.7rem;
+    font-size: 2.55rem;
+  }
+
+  .choice-quiz-header {
+    padding-bottom: 1rem;
+  }
+
+  .choice-table {
+    gap: 1.25rem;
+    padding-top: 1.25rem;
   }
 
   .choice-table-story h2 {
-    font-size: 2rem;
+    font-size: 1.55rem;
+    line-height: 1.07;
   }
 
   .choice-scene img {
-    min-height: 18rem;
-    max-height: 21rem;
+    height: 8rem;
+    min-height: 8rem;
+    max-height: 8rem;
+    object-position: left 44%;
   }
 
   .choice-scene figcaption {
-    right: 0.7rem;
-    bottom: 0.7rem;
+    display: none;
   }
 
   .choice-table-actions {
@@ -3811,7 +3819,7 @@ body {
   .choice-option {
     grid-template-columns: 2.7rem minmax(0, 1fr) 1.4rem;
     gap: 0.75rem;
-    min-height: 5.7rem;
+    min-height: 4.9rem;
     padding: 0.7rem;
   }
 
@@ -3822,10 +3830,6 @@ body {
 
   .choice-copy {
     font-size: 0.88rem;
-  }
-
-  .choice-connector {
-    display: none;
   }
 
   .choice-guidance,
@@ -3851,7 +3855,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .choice-table,
   .choice-option,
-  .choice-connector,
   .choice-scene img,
   .choice-feedback {
     animation: none !important;
